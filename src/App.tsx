@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import TestBtn from './components/button'
+import Header from "./components/Header/Header";
+import GlobalStylesAndFonts from "./fonts/fonts";
+import Home from "./pages/Home/Home";
 
 function App() {
-  const [count, setCount] = useState(0)
+    return (
+        <>
+            <div className='app'>
+                <GlobalStylesAndFonts />
+                <Header />
 
-  const clickHandler = () => setCount((count) => count + 20)
-
-  return (
-    <div className="App">
-      <TestBtn count={count} clickHandler={clickHandler}/>
-    </div>
-  )
+                <Home />
+            </div>
+        </>
+    );
 }
 
-export default App
+export default App;
