@@ -1,6 +1,6 @@
 import Header from "./components/Header/Header";
 import GlobalStylesAndFonts from "./fonts/fonts";
-import Home from "./pages/Home/Home";
+import Home from "./pages/Home/index";
 
 function App() {
     return (
