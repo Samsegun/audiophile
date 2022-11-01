@@ -72,7 +72,7 @@ const Hero = () => {
                     quality made for the passionate music enthusiast.
                 </p>
 
-                <Button default={true}>see product</Button>
+                <Button bgColor='#D87D4A'>see product</Button>
             </HeroText>
 
             <picture>

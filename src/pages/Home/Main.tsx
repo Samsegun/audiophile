@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import { ContentWrapper } from "../../styles/global-styles";
+import About from "./About";
+import Categories from "./ProductCategories";
+import ProductShowcase from "./ProductShowcase";
 
 const MainWrapper = styled.main`
     margin: 2.5rem 1.5rem;
@@ -6,12 +10,13 @@ const MainWrapper = styled.main`
 
 const Main = () => {
     return (
-        <MainWrapper>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non rem
-            porro ad tenetur vitae, repudiandae suscipit quos, facere molestiae
-            quasi asperiores. Commodi maxime laudantium culpa minus, dolorum
-            sint nesciunt magnam?
-        </MainWrapper>
+        <ContentWrapper flex={false}>
+            <Categories />
+
+            <ProductShowcase />
+
+            <About />
+        </ContentWrapper>
     );
 };
 
