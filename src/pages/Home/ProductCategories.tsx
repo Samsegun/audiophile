@@ -14,6 +14,27 @@ const categoryData = [
     },
 ];
 
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+        align-items: center;
+        margin-top: 64px;
+
+        & > * {
+            flex-basis: 33.33%;
+            margin-right: 10px;
+        }
+
+        & > *:last-child {
+            margin-right: 0;
+        }
+    }
+`;
+
 const CategorySection = styled.section`
     position: relative;
     min-height: 13.6rem;
@@ -72,7 +93,7 @@ const CategoryWrapper = styled.div`
 
 const Categories = () => {
     return (
-        <div>
+        <Wrapper>
             {categoryData.map((category, idx) => {
                 return (
                     <CategorySection key={idx}>
@@ -84,6 +105,7 @@ const Categories = () => {
                                     className='showcaseImg'
                                 />
                             </div>
+
                             <div className='info'>
                                 <p>{category.title}</p>
                                 <button>
@@ -94,7 +116,7 @@ const Categories = () => {
                     </CategorySection>
                 );
             })}
-        </div>
+        </Wrapper>
     );
 };
 

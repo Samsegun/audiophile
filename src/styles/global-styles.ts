@@ -9,4 +9,8 @@ export const ContentWrapper = styled.div<WrapperProps>`
     display: ${props => (props.flex ? "flex" : "block")};
     justify-content: space-between;
     align-items: center;
+
+    @media screen and (min-width: 768px) {
+        padding: 2rem 2.5rem;
+    }
 `;

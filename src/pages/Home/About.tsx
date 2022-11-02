@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import bestGear from "/assets/shared/mobile/image-best-gear.jpg";
+import bestGearTab from "/assets/shared/tablet/image-best-gear.jpg";
+import bestGearDesk from "/assets/shared/desktop/image-best-gear.jpg";
 
 const AboutWrapper = styled.section`
     margin-bottom: 7.5rem;
@@ -16,6 +18,12 @@ const AboutWrapper = styled.section`
         margin-top: 2.5rem;
         text-align: center;
 
+        @media screen and (min-width: 768px) {
+            width: 80%;
+            margin: 3rem auto;
+            line-height: 44px;
+        }
+
         h2 {
             font-weight: 700;
             font-size: 1.75rem;
@@ -23,6 +31,10 @@ const AboutWrapper = styled.section`
             text-transform: uppercase;
             letter-spacing: 1px;
             line-height: 38px;
+
+            @media screen and (min-width: 768px) {
+                font-size: 2.5rem;
+            }
 
             span {
                 color: #d87d4a;
@@ -42,7 +54,12 @@ const About = () => {
     return (
         <AboutWrapper>
             <div className='img-wrapper'>
-                <img src={bestGear} alt='' />
+                <picture>
+                    <source srcSet={bestGearDesk} media='(min-width: 1280px)' />
+                    <source srcSet={bestGearTab} media='(min-width: 768px)' />
+                    <source srcSet={bestGear} />
+                    <img src={bestGear} alt='' />
+                </picture>
             </div>
 
             <div className='info'>

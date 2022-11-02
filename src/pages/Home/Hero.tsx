@@ -22,6 +22,7 @@ const HeroText = styled.div`
     text-align: center;
     color: #fff;
     z-index: 2;
+
     & span,
     h1 {
         text-transform: uppercase;
@@ -36,6 +37,10 @@ const HeroText = styled.div`
         font-size: 2.25rem;
         margin: 1rem 0 1.5rem;
         letter-spacing: 2.29px;
+
+        @media screen and (min-width: 768px) {
+            font-size: 3.5rem;
+        }
     }
     & p {
         font-size: 0.9rem;
@@ -45,6 +50,12 @@ const HeroText = styled.div`
         letter-spacing: 0.3px;
         mix-blend-mode: normal;
         opacity: 0.75;
+    }
+
+    @media screen and (min-width: 768px) {
+        top: 30%;
+        max-width: 380px;
+        padding: 0;
     }
 `;
 

@@ -2,7 +2,11 @@ import styled from "styled-components";
 import { Button } from "../../styles/Button";
 import zx9 from "/assets/home/mobile/image-speaker-zx9.png";
 import zx7 from "/assets/home/mobile/image-speaker-zx7.jpg";
+import zx7Tab from "/assets/home/tablet/image-speaker-zx7.jpg";
+import zx7Desk from "/assets/home/desktop/image-speaker-zx7.jpg";
 import yx1 from "/assets/home/mobile/image-earphones-yx1.jpg";
+import yx1Tab from "/assets/home/tablet/image-earphones-yx1.jpg";
+import yx1Desk from "/assets/home/desktop/image-earphones-yx1.jpg";
 
 const ShowcaseWrapper = styled.section`
     margin: 7.5rem 0;
@@ -17,7 +21,12 @@ const ShowcaseWrapper = styled.section`
         border-radius: 8px;
 
         .img-wrapper {
-            padding: 0 77px;
+            margin: auto;
+            max-width: 178px;
+
+            @media screen and (min-width: 768px) {
+                max-width: 198px;
+            }
 
             img {
                 width: 100%;
@@ -27,10 +36,20 @@ const ShowcaseWrapper = styled.section`
         .info {
             margin-top: 2rem;
 
+            @media screen and (min-width: 768px) {
+                margin: 4rem auto;
+                max-width: 350px;
+            }
+
             h2 {
                 font-size: 2.25rem;
                 text-transform: uppercase;
                 letter-spacing: 1.29px;
+
+                @media screen and (min-width: 768px) {
+                    font-size: 3.5rem;
+                    letter-spacing: 2px;
+                }
             }
 
             p {
@@ -39,6 +58,10 @@ const ShowcaseWrapper = styled.section`
                 font-weight: 500;
                 opacity: 0.75;
                 line-height: 25px;
+
+                @media screen and (min-width: 768px) {
+                    margin: 1.5rem 0 2.5rem;
+                }
             }
         }
     }
@@ -73,6 +96,16 @@ const ShowcaseWrapper = styled.section`
 
     /* yx1 speaker starts here */
     .yx1 {
+        @media screen and (min-width: 768px) {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            & > * {
+                flex-basis: 50%;
+            }
+        }
+
         .img-wrapper {
             width: 100%;
 
@@ -84,10 +117,19 @@ const ShowcaseWrapper = styled.section`
 
         .info {
             background: #f1f1f1;
+
             margin-top: 1.5rem;
             padding: 2.5rem 1.5rem;
             border-radius: 8px;
             text-transform: uppercase;
+
+            @media screen and (min-width: 768px) {
+                margin-top: 0;
+                align-self: stretch;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
             h2 {
                 font-size: 1.75rem;
@@ -124,7 +166,12 @@ const ProductShowcase = () => {
             {/* zx7 speaker */}
             <div className='zx7'>
                 <div className='img-wrapper'>
-                    <img src={zx7} alt='speaker' />
+                    <picture>
+                        <source srcSet={zx7Desk} media='(min-width: 1280px)' />
+                        <source srcSet={zx7Tab} media='(min-width: 768px)' />
+                        <source srcSet={zx7} />
+                        <img src={zx7} alt='speaker' />
+                    </picture>
                 </div>
 
                 <div className='info'>
@@ -141,17 +188,24 @@ const ProductShowcase = () => {
             {/* yx1 earphone */}
             <div className='yx1'>
                 <div className='img-wrapper'>
-                    <img src={yx1} alt='' />
+                    <picture>
+                        <source srcSet={yx1Desk} media='(min-width: 1280px)' />
+                        <source srcSet={yx1Tab} media='(min-width: 768px)' />
+                        <source srcSet={yx1} />
+                        <img src={yx1} alt='earphone' />
+                    </picture>
                 </div>
 
                 <div className='info'>
-                    <h2>yx1 earphones</h2>
-                    <Button
-                        bgColor='transparent'
-                        color='#000'
-                        border='1px solid black'>
-                        SEE PRODUCT
-                    </Button>
+                    <div>
+                        <h2>yx1 earphones</h2>
+                        <Button
+                            bgColor='transparent'
+                            color='#000'
+                            border='1px solid black'>
+                            SEE PRODUCT
+                        </Button>
+                    </div>
                 </div>
             </div>
         </ShowcaseWrapper>

@@ -5,20 +5,41 @@ import cartIcon from "../../assets/cart-icon.png";
 import navIcon from "../../assets/mobile-nav.png";
 import logo from "../../assets/audiophile-logo.png";
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.header`
     background: black;
     color: #fff;
+
+    button {
+        background: none;
+        border: none;
+    }
+
+    .logo-menu {
+        flex-basis: 65%;
+        display: flex;
+        justify-content: space-between;
+
+        @media screen and (min-width: 768px) {
+            flex-basis: 30%;
+        }
+    }
 `;
 
 const Header = () => {
     return (
         <StyledHeader>
             <ContentWrapper flex={true}>
-                <img src={navIcon} alt='navigation tab' />
+                <div className='logo-menu'>
+                    <button>
+                        <img src={navIcon} alt='navigation tab' />
+                    </button>
 
-                <img src={logo} alt='audiophile' />
+                    <img src={logo} alt='audiophile' />
+                </div>
 
-                <img src={cartIcon} alt='cart' />
+                <button>
+                    <img src={cartIcon} alt='cart' />
+                </button>
             </ContentWrapper>
         </StyledHeader>
     );
