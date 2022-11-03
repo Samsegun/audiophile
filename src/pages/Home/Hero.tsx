@@ -10,15 +10,37 @@ const StyledHero = styled.div`
     & img {
         width: 100%;
     }
+    /* 
+    @media screen and (min-width: 1280px) {
+        height: 632px;
+
+        & img {
+            height: 100%;
+        }
+    } */
+`;
+
+const HeroTextWrapper = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1280px;
+    margin: auto;
+
+    @media screen and (min-width: 1280px) {
+        justify-content: start;
+        padding: 0 2.5rem;
+    }
 `;
 
 const HeroText = styled.div`
-    position: absolute;
-    top: 32%;
-    left: 50%;
-    width: 100%;
-    padding: 0 1.5rem;
-    transform: translateX(-50%);
+    width: 328px;
+    margin-top: 5rem;
     text-align: center;
     color: #fff;
     z-index: 2;
@@ -50,12 +72,19 @@ const HeroText = styled.div`
         letter-spacing: 0.3px;
         mix-blend-mode: normal;
         opacity: 0.75;
+
+        @media screen and (min-width: 1280px) {
+            padding: 0 1rem 0 0;
+        }
     }
 
     @media screen and (min-width: 768px) {
-        top: 30%;
-        max-width: 380px;
-        padding: 0;
+        width: 380px;
+        margin-top: 3rem;
+    }
+
+    @media screen and (min-width: 1280px) {
+        text-align: left;
     }
 `;
 
@@ -72,19 +101,21 @@ const DarkOverlay = styled.div`
 const Hero = () => {
     return (
         <StyledHero>
-            <HeroText>
-                <span>New Product</span>
-                <h1>
-                    XX99 Mark II <br />
-                    HeadphoneS
-                </h1>
-                <p>
-                    Experience natural, lifelike audio and exceptional build
-                    quality made for the passionate music enthusiast.
-                </p>
+            <HeroTextWrapper>
+                <HeroText>
+                    <span>New Product</span>
+                    <h1>
+                        XX99 Mark II <br />
+                        HeadphoneS
+                    </h1>
+                    <p>
+                        Experience natural, lifelike audio and exceptional build
+                        quality made for the passionate music enthusiast.
+                    </p>
 
-                <Button bgColor='#D87D4A'>see product</Button>
-            </HeroText>
+                    <Button bgColor='#D87D4A'>see product</Button>
+                </HeroText>
+            </HeroTextWrapper>
 
             <picture>
                 <source srcSet={DesktopBg} media='(min-width: 1280px)' />

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Button } from "../../styles/Button";
 import zx9 from "/assets/home/mobile/image-speaker-zx9.png";
+import zx9Desk from "/assets/home/desktop/image-speaker-zx9.png";
 import zx7 from "/assets/home/mobile/image-speaker-zx7.jpg";
 import zx7Tab from "/assets/home/tablet/image-speaker-zx7.jpg";
 import zx7Desk from "/assets/home/desktop/image-speaker-zx7.jpg";
@@ -28,6 +29,12 @@ const ShowcaseWrapper = styled.section`
                 max-width: 198px;
             }
 
+            @media screen and (min-width: 1280px) {
+                /* position: absolute; */
+                max-width: fit-content;
+                width: 410px;
+            }
+
             img {
                 width: 100%;
             }
@@ -39,6 +46,10 @@ const ShowcaseWrapper = styled.section`
             @media screen and (min-width: 768px) {
                 margin: 4rem auto;
                 max-width: 350px;
+            }
+
+            @media screen and (min-width: 1280px) {
+                text-align: left;
             }
 
             h2 {
@@ -63,6 +74,12 @@ const ShowcaseWrapper = styled.section`
                     margin: 1.5rem 0 2.5rem;
                 }
             }
+        }
+
+        @media screen and (min-width: 1280px) {
+            /* position: relative; */
+            display: flex;
+            padding-bottom: 0;
         }
     }
     /* zx9 speaker ends here */
@@ -106,6 +123,10 @@ const ShowcaseWrapper = styled.section`
             }
         }
 
+        @media screen and (min-width: 1280px) {
+            gap: 30px;
+        }
+
         .img-wrapper {
             width: 100%;
 
@@ -146,7 +167,11 @@ const ProductShowcase = () => {
             {/* zx9 speaker */}
             <div className='zx9'>
                 <div className='img-wrapper'>
-                    <img src={zx9} alt='speaker' />
+                    <picture>
+                        <source srcSet={zx9Desk} media='(min-width: 1280px)' />
+                        <source srcSet={zx9} />
+                        <img src={zx9} alt='speaker' />
+                    </picture>
                 </div>
 
                 <div className='info'>

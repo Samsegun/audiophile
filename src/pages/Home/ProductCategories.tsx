@@ -33,6 +33,16 @@ const Wrapper = styled.div`
             margin-right: 0;
         }
     }
+
+    @media screen and (min-width: 1280px) {
+        & > * {
+            margin-right: 30px;
+        }
+
+        & > *:last-child {
+            margin-right: 0;
+        }
+    }
 `;
 
 const CategorySection = styled.section`

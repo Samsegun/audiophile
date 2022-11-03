@@ -12,6 +12,11 @@ const AboutWrapper = styled.section`
             width: 100%;
             border-radius: 8px;
         }
+
+        @media screen and (min-width: 1280px) {
+            flex-basis: 50%;
+            order: 1;
+        }
     }
 
     .info {
@@ -22,6 +27,12 @@ const AboutWrapper = styled.section`
             width: 80%;
             margin: 3rem auto;
             line-height: 44px;
+        }
+
+        @media screen and (min-width: 1280px) {
+            flex-basis: 50%;
+            text-align: left;
+            padding-right: 6rem;
         }
 
         h2 {
@@ -36,6 +47,11 @@ const AboutWrapper = styled.section`
                 font-size: 2.5rem;
             }
 
+            @media screen and (min-width: 1280px) {
+                letter-spacing: 1.5px;
+                line-height: 44px;
+            }
+
             span {
                 color: #d87d4a;
             }
@@ -47,6 +63,12 @@ const AboutWrapper = styled.section`
             line-height: 25px;
             opacity: 0.5;
         }
+    }
+
+    @media screen and (min-width: 1280px) {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
     }
 `;
 
