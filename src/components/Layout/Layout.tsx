@@ -1,11 +1,12 @@
 import { useInView } from "react-intersection-observer";
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import Backdrop from "../Utils/Backdrop";
+import { MobileNavContext } from "../../store/mobileNavContext";
 
 const AppWrapper = styled.div`
     position: relative;
@@ -13,21 +14,16 @@ const AppWrapper = styled.div`
 
 const Layout: React.FC = () => {
     const { ref, inView } = useInView();
-    const [modal, setModal] = useState(false);
-
-    const handleModal = (a?: string) => {
-        if (a === "backdrop") {
-            setModal(false);
-        } else {
-            setModal(prev => !prev);
-        }
-    };
+    const ctx = useContext(MobileNavContext);
 
     const ModalTemplate = () => {
-        if (modal) {
+        if (ctx.modal) {
             return (
                 <>
-                    <Backdrop navInView={inView} handleModal={handleModal} />
+                    <Backdrop
+                        navInView={inView}
+                        handleModal={ctx.handleModal}
+                    />
                     <MobileMenu />
                 </>
             );
@@ -37,7 +33,7 @@ const Layout: React.FC = () => {
 
     return (
         <AppWrapper>
-            <Header headRef={ref} modalHandler={handleModal} />
+            <Header headRef={ref} modalHandler={ctx.handleModal} />
             <ModalTemplate />
             <Outlet />
             <Footer />

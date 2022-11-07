@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ContentWrapper } from "../../styles/global-styles";
-import About from "./About";
+import About from "../../components/About/About";
 import Categories from "./Categories";
 import ProductShowcase from "./ProductShowcase";
 

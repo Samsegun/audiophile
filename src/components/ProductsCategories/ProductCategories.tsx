@@ -1,5 +1,8 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import arrowRight from "../../assets/arrow-right.svg";
+import { MobileNavContext } from "../../store/mobileNavContext";
 
 const categoryData = [
     {
@@ -102,11 +105,22 @@ const Wrapper = styled.div`
 `;
 
 const ProductCategories = () => {
+    const mobileCtx: { modal: boolean; handleModal: (a?: string) => void } =
+        useContext(MobileNavContext);
+    const navigate = useNavigate();
+
+    const productHandler = (title: string) => {
+        mobileCtx.handleModal("backdrop");
+        navigate(`product/${title}`);
+    };
+
     return (
         <Wrapper>
             {categoryData.map((category, idx) => {
                 return (
-                    <CategorySection key={idx}>
+                    <CategorySection
+                        key={idx}
+                        onClick={productHandler.bind(null, category.title)}>
                         <CategoryWrapper>
                             <div className='imgContainer'>
                                 <img

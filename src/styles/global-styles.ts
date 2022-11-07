@@ -15,7 +15,6 @@ export const ContentWrapper = styled.div<WrapperProps>`
     @media screen and (min-width: 768px) {
         padding: 2rem 2.5rem;
     }
-
     /* @media screen and (min-width: 1280px) {
         m
     } */
