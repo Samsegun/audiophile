@@ -1,9 +1,13 @@
-import React from "react";
 import styled from "styled-components";
 import { ContentWrapper } from "../../styles/global-styles";
 import cartIcon from "../../assets/cart-icon.png";
 import navIcon from "../../assets/mobile-nav.png";
 import logo from "../../assets/audiophile-logo.png";
+
+interface HeaderProps {
+    headRef: () => void;
+    modalHandler: () => void;
+}
 
 const StyledHeader = styled.header`
     background: black;
@@ -53,12 +57,12 @@ const StyledHeader = styled.header`
     }
 `;
 
-const Header = () => {
+const Header: React.FC<HeaderProps> = ({ headRef, modalHandler }) => {
     return (
-        <StyledHeader>
+        <StyledHeader ref={headRef}>
             <ContentWrapper flex={true}>
                 <div className='logo-menu'>
-                    <button>
+                    <button onClick={modalHandler}>
                         <img src={navIcon} alt='navigation tab' />
                     </button>
 

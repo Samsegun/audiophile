@@ -1,12 +1,8 @@
 import styled from "styled-components";
 import { ContentWrapper } from "../../styles/global-styles";
 import About from "./About";
-import Categories from "./ProductCategories";
+import Categories from "./Categories";
 import ProductShowcase from "./ProductShowcase";
-
-const MainWrapper = styled.main`
-    margin: 2.5rem 1.5rem;
-`;
 
 const Main = () => {
     return (

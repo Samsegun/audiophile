@@ -14,37 +14,6 @@ const categoryData = [
     },
 ];
 
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    @media screen and (min-width: 768px) {
-        flex-direction: row;
-        align-items: center;
-        margin-top: 64px;
-
-        & > * {
-            flex-basis: 33.33%;
-            margin-right: 10px;
-        }
-
-        & > *:last-child {
-            margin-right: 0;
-        }
-    }
-
-    @media screen and (min-width: 1280px) {
-        & > * {
-            margin-right: 30px;
-        }
-
-        & > *:last-child {
-            margin-right: 0;
-        }
-    }
-`;
-
 const CategorySection = styled.section`
     position: relative;
     min-height: 13.6rem;
@@ -101,7 +70,38 @@ const CategoryWrapper = styled.div`
     }
 `;
 
-const Categories = () => {
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+        align-items: center;
+        margin-top: 64px;
+
+        & > * {
+            flex-basis: 33.33%;
+            margin-right: 10px;
+        }
+
+        & > *:last-child {
+            margin-right: 0;
+        }
+    }
+
+    @media screen and (min-width: 1280px) {
+        & > * {
+            margin-right: 30px;
+        }
+
+        & > *:last-child {
+            margin-right: 0;
+        }
+    }
+`;
+
+const ProductCategories = () => {
     return (
         <Wrapper>
             {categoryData.map((category, idx) => {
@@ -130,4 +130,4 @@ const Categories = () => {
     );
 };
 
-export default Categories;
+export default ProductCategories;
