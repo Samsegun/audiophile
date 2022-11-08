@@ -20,11 +20,11 @@ const Layout: React.FC = () => {
         if (ctx.modal) {
             return (
                 <>
+                    <MobileMenu />
                     <Backdrop
                         navInView={inView}
                         handleModal={ctx.handleModal}
                     />
-                    <MobileMenu />
                 </>
             );
         }

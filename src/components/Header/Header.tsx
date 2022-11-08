@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { ContentWrapper } from "../../styles/global-styles";
 import cartIcon from "../../assets/cart-icon.png";
 import navIcon from "../../assets/mobile-nav.png";
@@ -66,7 +67,9 @@ const Header: React.FC<HeaderProps> = ({ headRef, modalHandler }) => {
                         <img src={navIcon} alt='navigation tab' />
                     </button>
 
-                    <img src={logo} alt='audiophile' />
+                    <Link to='/'>
+                        <img src={logo} alt='audiophile' />
+                    </Link>
                 </div>
 
                 <nav className='nav-bar'>

@@ -4,8 +4,9 @@ import Layout from "./components/Layout/Layout";
 import GlobalStylesAndFonts from "./fonts/fonts";
 import Home from "./pages/Home/index";
 import Earphones from "./pages/Earphones";
-import Product from "./pages/Product";
 import MobileNavContextProvider from "./store/mobileNavContext";
+import Category from "./pages/Category";
+import Product from "./pages/Product";
 
 function App() {
     return (
@@ -17,7 +18,14 @@ function App() {
                         <Route path='/' element={<Layout />}>
                             <Route index element={<Home />} />
                             <Route path='earphones' element={<Earphones />} />
-                            <Route path='product/:id' element={<Product />} />
+                            <Route
+                                path='/category/:id'
+                                element={<Category />}
+                            />
+                            <Route
+                                path='/category/:id/:id'
+                                element={<Product />}
+                            />
                         </Route>
                     </Routes>
                 </BrowserRouter>

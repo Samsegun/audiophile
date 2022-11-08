@@ -105,13 +105,13 @@ const Wrapper = styled.div`
 `;
 
 const ProductCategories = () => {
-    const mobileCtx: { modal: boolean; handleModal: (a?: string) => void } =
+    const mobileCtx: { handleModal: (a?: string) => void } =
         useContext(MobileNavContext);
     const navigate = useNavigate();
 
-    const productHandler = (title: string) => {
+    const productNavHandler = (title: string) => {
         mobileCtx.handleModal("backdrop");
-        navigate(`product/${title}`);
+        navigate(`/category/${title}`);
     };
 
     return (
@@ -120,7 +120,7 @@ const ProductCategories = () => {
                 return (
                     <CategorySection
                         key={idx}
-                        onClick={productHandler.bind(null, category.title)}>
+                        onClick={productNavHandler.bind(null, category.title)}>
                         <CategoryWrapper>
                             <div className='imgContainer'>
                                 <img

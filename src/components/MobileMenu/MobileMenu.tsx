@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import ProductCategories from "../ProductsCategories/ProductCategories";
 
+const Placeholder = styled.div`
+    position: relative;
+`;
+
 const OuterWrapper = styled.div`
     position: absolute;
     top: 2%;
@@ -17,11 +21,13 @@ const Wrapper = styled.section`
 
 const MobileMenu = () => {
     return (
-        <OuterWrapper>
-            <Wrapper>
-                <ProductCategories />
-            </Wrapper>
-        </OuterWrapper>
+        <Placeholder>
+            <OuterWrapper>
+                <Wrapper>
+                    <ProductCategories />
+                </Wrapper>
+            </OuterWrapper>
+        </Placeholder>
     );
 };
 
