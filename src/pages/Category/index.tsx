@@ -1,13 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../../styles/Button";
 import { ContentWrapper } from "../../styles/global-styles";
 import Categories from "../Home/Categories";
-import {
-    checkIdName,
-    filterAndOrderData,
-    splitProductName,
-} from "../../Utils/dataUtils";
+import { filterAndOrderData, splitName } from "../../Utils/dataUtils";
 
 const ProductSection = styled.section`
     .title-wrapper {
@@ -66,8 +63,19 @@ const ProductText = styled.article`
 
 const Category = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // scroll to the top when page renders
+
+        window.scrollTo({ top: 0 });
+    }, [id]);
 
     const orderedCategoryData = filterAndOrderData(id);
+
+    const navigateToProduct = (productName: string) => {
+        navigate(`/category/${id}/${productName}`);
+    };
 
     return (
         <ProductSection>
@@ -109,17 +117,21 @@ const Category = () => {
                                 {category.new && <span>new product</span>}
 
                                 <h1>
-                                    {splitProductName(
-                                        category.name,
-                                        category.category
-                                    )}
+                                    {splitName(category.name).firstLine}
                                     <br />
-                                    {checkIdName(id)}
+                                    {splitName(category.name).secondLine}
                                 </h1>
 
                                 <p>{category.description}</p>
 
-                                <Button bgColor='#D87D4A'>see product</Button>
+                                <Button
+                                    bgColor='#D87D4A'
+                                    onClick={navigateToProduct.bind(
+                                        null,
+                                        category.slug
+                                    )}>
+                                    see product
+                                </Button>
                             </ProductText>
                         </ProductWrapper>
                     );
