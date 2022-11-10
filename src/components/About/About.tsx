@@ -3,7 +3,8 @@ import bestGear from "/assets/shared/mobile/image-best-gear.jpg";
 import bestGearTab from "/assets/shared/tablet/image-best-gear.jpg";
 import bestGearDesk from "/assets/shared/desktop/image-best-gear.jpg";
 
-const AboutWrapper = styled.section`
+const AboutWrapper = styled.section<{ marginTop?: string }>`
+    margin-top: ${props => (props.marginTop ? props.marginTop : null)};
     margin-bottom: 7.5rem;
 
     .img-wrapper {
@@ -72,9 +73,9 @@ const AboutWrapper = styled.section`
     }
 `;
 
-const About = () => {
+const About: React.FC<{ marginTop?: string }> = ({ marginTop }) => {
     return (
-        <AboutWrapper>
+        <AboutWrapper marginTop={marginTop}>
             <div className='img-wrapper'>
                 <picture>
                     <source srcSet={bestGearDesk} media='(min-width: 1280px)' />

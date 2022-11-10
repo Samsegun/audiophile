@@ -35,15 +35,24 @@ export function filterAndOrderData(id: string | undefined = "") {
 // }
 
 export function splitName(productName: string) {
-    let initialName = productName.split(" ");
+    let nameArray = productName.split(" ");
 
-    let line1 = productName.split(" ", initialName.length - 1);
+    let line1 = productName.split(" ", nameArray.length - 1);
 
-    let line2 = initialName[initialName.length - 1];
+    let line2 = nameArray[nameArray.length - 1];
 
     let firstLine = line1.join(" ");
 
     return { firstLine, secondLine: line2 };
+}
+
+export function splitParagraph(text: string) {
+    let textArray = text.split("\n\n");
+
+    let textOne = textArray[0];
+    let textTwo = textArray[1];
+
+    return { textOne, textTwo };
 }
 
 export function findSingleProduct(id: string | undefined = "") {

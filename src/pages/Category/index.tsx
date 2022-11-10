@@ -5,6 +5,7 @@ import { Button } from "../../styles/Button";
 import { ContentWrapper } from "../../styles/global-styles";
 import Categories from "../Home/Categories";
 import { filterAndOrderData, splitName } from "../../Utils/dataUtils";
+import About from "../../components/About/About";
 
 const ProductSection = styled.section`
     .title-wrapper {
@@ -137,6 +138,8 @@ const Category = () => {
                     );
                 })}
                 <Categories />
+
+                <About marginTop='7.5rem' />
             </ContentWrapper>
         </ProductSection>
     );
