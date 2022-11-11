@@ -10,7 +10,6 @@ export default createGlobalStyle`
     src:  url(${ManropeRegular}) format('truetype'), 
           url(${ManropeMedium}) format('truetype'),
           url(${ManropeBold}) format('truetype');
-    /* font-weight: 300; */
     font-style: normal;
     }
 

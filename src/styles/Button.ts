@@ -15,5 +15,6 @@ export const Button = styled.button<Props>`
     text-transform: uppercase;
     outline: none;
     border: ${props => props.border || "none"};
+    cursor: pointer;
     letter-spacing: 1px;
 `;

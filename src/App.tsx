@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import GlobalStylesAndFonts from "./fonts/fonts";
 import Home from "./pages/Home/index";
-import Earphones from "./pages/Earphones";
 import MobileNavContextProvider from "./store/mobileNavContext";
 import Category from "./pages/Category";
 import Product from "./pages/Product";
@@ -17,7 +16,6 @@ function App() {
                     <Routes>
                         <Route path='/' element={<Layout />}>
                             <Route index element={<Home />} />
-                            <Route path='earphones' element={<Earphones />} />
                             <Route
                                 path='/category/:id'
                                 element={<Category />}
