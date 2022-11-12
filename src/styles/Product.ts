@@ -97,25 +97,68 @@ export const ListItem = styled.li`
 export const Gallery = styled.div`
     margin: 5.5rem 0;
 
+    .img-wrapper {
+        @media screen and (min-width: 768px) {
+            &:nth-child(1) {
+                grid-column: 1/2;
+            }
+            &:nth-child(2) {
+                grid-row: 2/3;
+                grid-column: 1/2;
+            }
+            &:nth-child(3) {
+                grid-column: 2/3;
+                grid-row: 1/3;
+            }
+        }
+    }
+
     picture {
         display: block;
         margin-bottom: 1.3rem;
-        background-color: teal;
+
+        @media screen and (min-width: 768px) {
+            margin-bottom: 0;
+            height: 100%;
+        }
     }
 
     img {
         width: 100%;
+        height: 100%;
+        /* object-fit: contain; */
         border-radius: 8px;
     }
 
     @media screen and (min-width: 768px) {
         display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        grid-template-rows: auto auto;
+        grid-column-gap: 18px;
+        grid-row-gap: 20px;
+        margin: 7.5rem 0;
+    }
+
+    @media screen and (min-width: 1280px) {
+        grid-column-gap: 30px;
+        grid-row-gap: 2rem;
     }
 `;
 
 export const OtherProducts = styled.div`
     text-align: center;
     margin-bottom: 7.5rem;
+
+    .product-wrapper {
+        @media screen and (min-width: 768px) {
+            margin-top: 4rem;
+            display: flex;
+            gap: 11px;
+        }
+        @media screen and (min-width: 1280px) {
+            gap: 30px;
+        }
+    }
 
     .product {
         margin-bottom: 3.5rem;

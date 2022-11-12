@@ -23,7 +23,7 @@ const Backdrop: React.FC<{
     return (
         <OverlayStyle
             navInView={navInView}
-            onClick={() => handleModal("backdrop")}></OverlayStyle>
+            onClick={handleModal.bind(null, "backdrop")}></OverlayStyle>
     );
 };
 

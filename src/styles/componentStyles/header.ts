@@ -13,6 +13,7 @@ export const StyledHeader = styled.header`
         flex-basis: 65%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         button {
             @media screen and (min-width: 1280px) {
@@ -21,7 +22,7 @@ export const StyledHeader = styled.header`
         }
 
         @media screen and (min-width: 768px) {
-            flex-basis: 30%;
+            flex-basis: 40%;
         }
 
         @media screen and (min-width: 1280px) {

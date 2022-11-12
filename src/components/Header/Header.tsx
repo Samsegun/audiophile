@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ headRef, modalHandler }) => {
                     </ul>
                 </nav>
 
-                <button>
+                <button onClick={modalHandler}>
                     <img src={cartIcon} alt='cart' />
                 </button>
             </ContentWrapper>

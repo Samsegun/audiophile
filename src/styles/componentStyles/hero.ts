@@ -3,8 +3,18 @@ import styled from "styled-components";
 export const StyledHero = styled.div`
     position: relative;
     width: 100%;
+    max-height: 632px;
+    background-color: #1a1a1a;
+
     & img {
         width: 100%;
+        height: 100%;
+        max-height: 632px;
+        object-fit: contain;
+    }
+
+    @media screen and (min-width: 1280px) {
+        background-color: #181818;
     }
 `;
 
@@ -19,6 +29,10 @@ export const HeroTextWrapper = styled.div`
     align-items: center;
     max-width: 1280px;
     margin: auto;
+
+    @media screen and (min-width: 768px) {
+        width: 80%;
+    }
 
     @media screen and (min-width: 1280px) {
         justify-content: start;

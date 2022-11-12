@@ -7,6 +7,7 @@ import Header from "../Header/Header";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import Backdrop from "../Utils/Backdrop";
 import { MobileNavContext } from "../../store/mobileNavContext";
+import Cart from "../Cart/Cart";
 
 const AppWrapper = styled.div`
     position: relative;
@@ -20,7 +21,8 @@ const Layout: React.FC = () => {
         if (ctx.modal) {
             return (
                 <>
-                    <MobileMenu />
+                    {/* <MobileMenu /> */}
+                    <Cart />
                     <Backdrop
                         navInView={inView}
                         handleModal={ctx.handleModal}
