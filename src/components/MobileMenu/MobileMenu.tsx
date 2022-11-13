@@ -11,7 +11,7 @@ const OuterWrapper = styled.div`
     left: 0;
     width: 100%;
     box-shadow: 0 10px 15px rgba(75, 75, 75, 0.6);
-    z-index: 3;
+    z-index: 4;
 `;
 
 const Wrapper = styled.section`

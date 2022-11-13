@@ -59,7 +59,9 @@ const ProductAndCartDetails: React.FC<Props> = ({ item }) => {
 
                 <CartButtons>
                     <div className='qty'>
-                        <button>-</button>0<button>+</button>
+                        <button>-</button>
+                        <span>0</span>
+                        <button>+</button>
                     </div>
                     <button className='cart-btn'>add to cart</button>
                 </CartButtons>

@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
 export const StyledHeader = styled.header`
-    background: black;
+    background: #000;
     color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 5;
 
     button {
         background: none;
