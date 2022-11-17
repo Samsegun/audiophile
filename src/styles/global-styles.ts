@@ -14,10 +14,10 @@ export const ContentWrapper = styled.div<WrapperProps>`
 
     @media screen and (min-width: 768px) {
         padding: 2rem 2.5rem;
-        width: 80%;
+        width: 90%;
     }
 
-    /* @media screen and (min-width: 1280px) {
+    @media screen and (min-width: 1280px) {
         width: 80%;
-    } */
+    }
 `;

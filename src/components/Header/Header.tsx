@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ headRef, modalHandler }) => {
         <StyledHeader ref={headRef}>
             <ContentWrapper flex={true}>
                 <div className='logo-menu'>
-                    <button onClick={modalHandler}>
+                    <button onClick={modalHandler.bind(null, "mobileNav")}>
                         <img src={navIcon} alt='navigation tab' />
                     </button>
 
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ headRef, modalHandler }) => {
                     </ul>
                 </nav>
 
-                <button onClick={modalHandler}>
+                <button onClick={modalHandler.bind(null, "cart")}>
                     <img src={cartIcon} alt='cart' />
                 </button>
             </ContentWrapper>

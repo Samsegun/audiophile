@@ -8,7 +8,7 @@ export const CartWrapper = styled.div`
     transform: translateX(-50%);
     min-width: 327px;
     max-width: 377px;
-    /* height: 488px; */
+    max-height: 488px;
     border-radius: 8px;
     z-index: 4;
 
@@ -36,6 +36,11 @@ export const CartWrapper = styled.div`
             border: none;
             opacity: 0.5;
         }
+    }
+
+    .cart-items-wrapper {
+        height: auto;
+        overflow-y: scroll;
     }
 `;
 

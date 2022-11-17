@@ -1,5 +1,13 @@
+import { useContext, useState } from "react";
+import { CartContext } from "../../store/cartContext";
 import { Wrapper, ProductText, CartButtons } from "../../styles/Product";
+import { updateAndReturnCartItems } from "../../Utils/cartUtils";
 import { splitName } from "../../Utils/dataUtils";
+
+enum OperationType {
+    DECREASE = "decrease",
+    INCREASE = "increase",
+}
 
 interface ProductProps {
     id: number;
@@ -23,7 +31,55 @@ interface Props {
 }
 
 const ProductAndCartDetails: React.FC<Props> = ({ item }) => {
-    const product = item[0];
+    const [qty, setQty] = useState<number>(1);
+
+    const { addToCart, cart, resetCart } = useContext(CartContext);
+
+    const productDetails = () => {
+        const queriedItem = cart.find(
+            cartItem => cartItem.slug === item[0].slug
+        );
+
+        const { description, new: productIsNew, image } = item[0];
+
+        if (queriedItem) {
+            const product = {
+                ...queriedItem,
+                description,
+                productIsNew,
+                image,
+            };
+            return product;
+        } else {
+            const product = { ...item[0], qty, productIsNew: item[0].new };
+            return product;
+        }
+    };
+
+    const product = productDetails();
+
+    const { firstLine, secondLine } = splitName(product.name);
+
+    const routeQtyHandler = (operation: string, slug: string) => {
+        // check if item is in cart
+        const queriedItem = cart.find(cartItem => cartItem.slug === slug);
+
+        // if item is in cart, *if* conditional block runs else
+        // *else* conditional block runs
+        if (queriedItem) {
+            const updatedCart = updateAndReturnCartItems(cart, operation, slug);
+            resetCart(updatedCart);
+            return;
+        } else {
+            if (operation === OperationType.DECREASE && qty > 1) {
+                setQty(qty - 1);
+            }
+
+            if (operation === OperationType.INCREASE) {
+                setQty(qty + 1);
+            }
+        }
+    };
 
     return (
         <Wrapper>
@@ -43,12 +99,14 @@ const ProductAndCartDetails: React.FC<Props> = ({ item }) => {
             </div>
 
             <ProductText>
-                {product.new && <span className='new'>new product</span>}
+                {product.productIsNew && (
+                    <span className='new'>new product</span>
+                )}
 
                 <h1>
-                    {splitName(product.name).firstLine}
+                    {firstLine}
                     <br />
-                    {splitName(product.name).secondLine}
+                    {secondLine}
                 </h1>
 
                 <p className='desc'>{product.description}</p>
@@ -59,11 +117,36 @@ const ProductAndCartDetails: React.FC<Props> = ({ item }) => {
 
                 <CartButtons>
                     <div className='qty'>
-                        <button>-</button>
-                        <span>0</span>
-                        <button>+</button>
+                        <button
+                            onClick={routeQtyHandler.bind(
+                                null,
+                                OperationType.DECREASE,
+                                product.slug
+                            )}>
+                            -
+                        </button>
+                        <span>{product.qty}</span>
+                        <button
+                            onClick={routeQtyHandler.bind(
+                                null,
+                                OperationType.INCREASE,
+                                product.slug
+                            )}>
+                            +
+                        </button>
                     </div>
-                    <button className='cart-btn'>add to cart</button>
+
+                    <button
+                        className='cart-btn'
+                        onClick={addToCart.bind(
+                            null,
+                            product.price,
+                            product.slug,
+                            product.name,
+                            product.qty
+                        )}>
+                        add to cart
+                    </button>
                 </CartButtons>
             </ProductText>
         </Wrapper>

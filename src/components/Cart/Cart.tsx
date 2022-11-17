@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { CartContext } from "../../store/cartContext";
 import {
     CartWrapper,
     CartDetails,
@@ -16,11 +18,11 @@ const CARTASSETS = [
     },
     {
         name: "xx99-mark-one-headphones",
-        path: "/assets/cart/image-xx99mark-one-headphones.jpg",
+        path: "/assets/cart/image-xx99-mark-one-headphones.jpg",
     },
     {
         name: "xx99-mark-two-headphones",
-        path: "/assets/cart/image-xx99mark-two-headphones.jpg",
+        path: "/assets/cart/image-xx99-mark-two-headphones.jpg",
     },
     {
         name: "zx7-speaker",
@@ -33,31 +35,58 @@ const CARTASSETS = [
 ];
 
 const Cart = () => {
+    const { cart, qtyHandler } = useContext(CartContext);
+
+    const findCartImgPath = (slug: string) => {
+        const path = CARTASSETS.find(asset => asset.name === slug);
+
+        return path?.path;
+    };
+
     return (
         <CartWrapper>
             <div className='inner-wrapper'>
                 <div className='heading'>
-                    <h2>cart (3)</h2>
+                    <h2>cart ({cart.length})</h2>
 
                     <button>Remove all</button>
                 </div>
 
-                <CartDetails>
-                    <div className='img-name'>
-                        <img src={CARTASSETS[0].path} alt='' />
+                <div className='cart-items-wrapper'>
+                    {cart.map((item, id) => {
+                        return (
+                            <CartDetails key={id}>
+                                <div className='img-name'>
+                                    <img
+                                        src={findCartImgPath(item.slug)}
+                                        alt=''
+                                    />
 
-                        <h3>
-                            xx99 mk ii
-                            <span>$ 2,999</span>
-                        </h3>
-                    </div>
+                                    <h3>
+                                        {item.name}
+                                        <span>$ {item.price}</span>
+                                    </h3>
+                                </div>
 
-                    <div className='qty'>
-                        <button>-</button>
-                        <span>1</span>
-                        <button>+</button>
-                    </div>
-                </CartDetails>
+                                <div className='qty'>
+                                    <button
+                                        onClick={() =>
+                                            qtyHandler("decrease", item.slug)
+                                        }>
+                                        -
+                                    </button>
+                                    <span>{item.qty}</span>
+                                    <button
+                                        onClick={() =>
+                                            qtyHandler("increase", item.slug)
+                                        }>
+                                        +
+                                    </button>
+                                </div>
+                            </CartDetails>
+                        );
+                    })}
+                </div>
 
                 <Total>
                     <span>TOTAL</span>

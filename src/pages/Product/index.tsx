@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { CartContext } from "../../store/cartContext";
 import { ContentWrapper } from "../../styles/global-styles";
 import {
     StyledSection,
@@ -29,9 +30,10 @@ interface GalleryProps {
     third: GalleryPropType;
 }
 
-const Product = () => {
+const Product: React.FC = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { cart } = useContext(CartContext);
 
     useEffect(() => {
         // scroll to the top when page renders

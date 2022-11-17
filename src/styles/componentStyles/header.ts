@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
-export const StyledHeader = styled.header`
+export const StyledHeader = styled.header<{ ref: any }>`
     background: #000;
     color: #fff;
-    position: sticky;
+    position: absolute;
     top: 0;
+    width: 100%;
     z-index: 5;
 
     button {
         background: none;
         border: none;
+        cursor: pointer;
     }
 
     .logo-menu {

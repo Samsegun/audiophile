@@ -11,6 +11,9 @@ import Cart from "../Cart/Cart";
 
 const AppWrapper = styled.div`
     position: relative;
+    .routes-wrapper {
+        padding-top: 5.5rem;
+    }
 `;
 
 const Layout: React.FC = () => {
@@ -18,10 +21,9 @@ const Layout: React.FC = () => {
     const ctx = useContext(MobileNavContext);
 
     const ModalTemplate = () => {
-        if (ctx.modal) {
+        if (ctx.isCart) {
             return (
                 <>
-                    {/* <MobileMenu /> */}
                     <Cart />
                     <Backdrop
                         navInView={inView}
@@ -30,6 +32,19 @@ const Layout: React.FC = () => {
                 </>
             );
         }
+
+        if (ctx.isMobileNav) {
+            return (
+                <>
+                    <MobileMenu />
+                    <Backdrop
+                        navInView={inView}
+                        handleModal={ctx.handleModal}
+                    />
+                </>
+            );
+        }
+
         return null;
     };
 
@@ -37,7 +52,9 @@ const Layout: React.FC = () => {
         <AppWrapper>
             <Header headRef={ref} modalHandler={ctx.handleModal} />
             <ModalTemplate />
-            <Outlet />
+            <div className='routes-wrapper'>
+                <Outlet />
+            </div>
             <Footer />
         </AppWrapper>
     );
