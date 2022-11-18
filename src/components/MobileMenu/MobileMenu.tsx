@@ -19,7 +19,7 @@ const OuterWrapper = styled.div`
 
 const Wrapper = styled.section`
     background: #fff;
-    padding: 8rem 0 1.5rem;
+    padding: 8rem 1.5rem 1.5rem;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
 

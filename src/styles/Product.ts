@@ -8,6 +8,12 @@ export const StyledSection = styled.section`
         border: none;
         line-height: 25px;
         opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .back-btn:hover {
+        transform: scale(1.1);
+        font-weight: 700;
     }
 `;
 
@@ -306,5 +312,11 @@ export const CartButtons = styled.div`
         width: 160px;
         height: 48px;
         letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 300ms ease;
+    }
+    .cart-btn:hover {
+        background-color: #f09763;
+        transform: scale(1.05);
     }
 `;

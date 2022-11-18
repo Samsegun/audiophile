@@ -6,6 +6,8 @@ import {
     Total,
     Checkout,
 } from "../../styles/componentStyles/cartStyles";
+import { getTotalPrice } from "../../Utils/cartUtils";
+import { getProductNameOnly } from "../../Utils/dataUtils";
 
 const CARTASSETS = [
     {
@@ -35,7 +37,7 @@ const CARTASSETS = [
 ];
 
 const Cart = () => {
-    const { cart, qtyHandler } = useContext(CartContext);
+    const { cart, qtyHandler, resetCart } = useContext(CartContext);
 
     const findCartImgPath = (slug: string) => {
         const path = CARTASSETS.find(asset => asset.name === slug);
@@ -43,13 +45,17 @@ const Cart = () => {
         return path?.path;
     };
 
+    const cartTotalPrice = cart.length ? getTotalPrice(cart) : 0;
+
     return (
         <CartWrapper>
             <div className='inner-wrapper'>
                 <div className='heading'>
                     <h2>cart ({cart.length})</h2>
 
-                    <button>Remove all</button>
+                    <button onClick={resetCart.bind(null, [])}>
+                        Remove all
+                    </button>
                 </div>
 
                 <div className='cart-items-wrapper'>
@@ -63,8 +69,10 @@ const Cart = () => {
                                     />
 
                                     <h3>
-                                        {item.name}
-                                        <span>$ {item.price}</span>
+                                        {getProductNameOnly(item.name)}
+                                        <span>
+                                            $ {item.price.toLocaleString()}
+                                        </span>
                                     </h3>
                                 </div>
 
@@ -90,7 +98,7 @@ const Cart = () => {
 
                 <Total>
                     <span>TOTAL</span>
-                    <span>$ 5,333</span>
+                    <span>$ {cartTotalPrice.toLocaleString()}</span>
                 </Total>
 
                 <Checkout>checkout</Checkout>

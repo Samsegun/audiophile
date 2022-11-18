@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { StyledFooter } from "../../styles/componentStyles/footer";
 import logo from "../../assets/audiophile-logo.png";
 
@@ -11,10 +12,18 @@ const Footer = () => {
                     </div>
 
                     <ul>
-                        <li>home</li>
-                        <li>headphones</li>
-                        <li>speakers</li>
-                        <li>earphones</li>
+                        <li>
+                            <Link to='/'>home</Link>
+                        </li>
+                        <li>
+                            <Link to='/category/headphones'>headphones</Link>
+                        </li>
+                        <li>
+                            <Link to='/category/speakers'>speakers</Link>
+                        </li>
+                        <li>
+                            <Link to='/category/earphones'>earphones</Link>
+                        </li>
                     </ul>
                 </div>
 

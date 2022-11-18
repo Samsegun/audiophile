@@ -35,11 +35,17 @@ export const CartWrapper = styled.div`
             background: none;
             border: none;
             opacity: 0.5;
+            cursor: pointer;
+        }
+
+        button:hover {
+            /* border-bottom: 1px solid; */
+            text-decoration: underline;
         }
     }
 
     .cart-items-wrapper {
-        height: auto;
+        max-height: 300px;
         overflow-y: scroll;
     }
 `;

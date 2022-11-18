@@ -26,10 +26,18 @@ const Header: React.FC<HeaderProps> = ({ headRef, modalHandler }) => {
 
                 <nav className='nav-bar'>
                     <ul>
-                        <li>home</li>
-                        <li>headphones</li>
-                        <li>speakers</li>
-                        <li>earphones</li>
+                        <li>
+                            <Link to='/'>home</Link>
+                        </li>
+                        <li>
+                            <Link to='/category/headphones'>headphones</Link>
+                        </li>
+                        <li>
+                            <Link to='/category/speakers'>speakers</Link>
+                        </li>
+                        <li>
+                            <Link to='/category/earphones'>earphones</Link>
+                        </li>
                     </ul>
                 </nav>
 

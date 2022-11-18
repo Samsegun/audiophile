@@ -60,3 +60,15 @@ export function findSingleProduct(id: string | undefined = "") {
 
     return product;
 }
+
+export function getProductNameOnly(name: string) {
+    if (name.includes("Headphones")) {
+        let splitName = name.split("Headphones");
+
+        return splitName.join(" ");
+    }
+
+    let splitName = name.split(" ");
+
+    return splitName[0];
+}

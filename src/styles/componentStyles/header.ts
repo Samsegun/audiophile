@@ -46,6 +46,15 @@ export const StyledHeader = styled.header<{ ref: any }>`
             font-size: 0.8rem;
             letter-spacing: 2px;
             text-transform: uppercase;
+
+            a {
+                display: block;
+                color: inherit;
+                text-decoration: none;
+            }
+            a:hover {
+                transform: scale(1.05);
+            }
         }
 
         @media screen and (min-width: 1280px) {

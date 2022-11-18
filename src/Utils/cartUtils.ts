@@ -44,3 +44,11 @@ export function updateAndReturnCartItems(
 
     return products;
 }
+
+export const getTotalPrice = (cart: CartContentTypes[]) => {
+    const cartQtys = cart.map(item => item.price * item.qty);
+
+    const totalPrice = cartQtys.reduce((item1, item2) => item1 + item2);
+
+    return totalPrice;
+};

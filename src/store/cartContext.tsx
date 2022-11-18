@@ -23,7 +23,7 @@ const CartContextProvider: React.FC<{ children: React.ReactNode }> = ({
         name: string,
         qty: number
     ) => {
-        // check if product is in cart
+        // check if product exsists in cart
         const productToAdd = cart.find(item => item.slug === slug);
 
         if (productToAdd) return;

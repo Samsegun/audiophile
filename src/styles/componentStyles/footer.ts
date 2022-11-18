@@ -45,6 +45,15 @@ export const StyledFooter = styled.footer`
             flex-direction: column;
             gap: 1rem;
 
+            a {
+                display: block;
+                color: inherit;
+                text-decoration: none;
+            }
+            a:hover {
+                transform: scale(1.05);
+            }
+
             @media screen and (min-width: 768px) {
                 flex-direction: row;
                 gap: 2.1rem;
