@@ -41,8 +41,10 @@ const Header: React.FC<HeaderProps> = ({ headRef, modalHandler }) => {
                     </ul>
                 </nav>
 
-                <button onClick={modalHandler.bind(null, "cart")}>
-                    <img src={cartIcon} alt='cart' />
+                <button
+                    className='cart-icon'
+                    onClick={modalHandler.bind(null, "cart")}>
+                    <img className='cart-icon' src={cartIcon} alt='cart' />
                 </button>
             </ContentWrapper>
         </StyledHeader>

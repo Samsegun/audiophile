@@ -53,6 +53,7 @@ export const StyledHeader = styled.header<{ ref: any }>`
                 text-decoration: none;
             }
             a:hover {
+                color: #d87d4a;
                 transform: scale(1.05);
             }
         }
@@ -60,5 +61,12 @@ export const StyledHeader = styled.header<{ ref: any }>`
         @media screen and (min-width: 1280px) {
             display: block;
         }
+    }
+
+    .cart-icon {
+        transition: all 300ms ease;
+    }
+    .cart-icon:hover {
+        transform: scale(1.1);
     }
 `;

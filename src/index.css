@@ -1,0 +1,5 @@
+.app  input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #d87d4a;
+}

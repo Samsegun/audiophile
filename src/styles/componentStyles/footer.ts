@@ -51,6 +51,7 @@ export const StyledFooter = styled.footer`
                 text-decoration: none;
             }
             a:hover {
+                color: #d87d4a;
                 transform: scale(1.05);
             }
 

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { CartContext } from "../../store/cartContext";
 import { ContentWrapper } from "../../styles/global-styles";
 import {
     StyledSection,

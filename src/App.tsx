@@ -7,6 +7,7 @@ import MobileNavContextProvider from "./store/mobileNavContext";
 import Category from "./pages/Category";
 import Product from "./pages/Product";
 import CartContextProvider from "./store/cartContext";
+import Checkout from "./pages/Checkout";
 
 function App() {
     return (
@@ -25,6 +26,10 @@ function App() {
                                 <Route
                                     path='/category/:id/:id'
                                     element={<Product />}
+                                />
+                                <Route
+                                    path='/checkout'
+                                    element={<Checkout />}
                                 />
                             </Route>
                         </Routes>

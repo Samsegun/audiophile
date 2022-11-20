@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../store/cartContext";
 import {
     CartWrapper,
@@ -38,6 +39,7 @@ const CARTASSETS = [
 
 const Cart = () => {
     const { cart, qtyHandler, resetCart } = useContext(CartContext);
+    const navigate = useNavigate();
 
     const findCartImgPath = (slug: string) => {
         const path = CARTASSETS.find(asset => asset.name === slug);
@@ -101,7 +103,9 @@ const Cart = () => {
                     <span>$ {cartTotalPrice.toLocaleString()}</span>
                 </Total>
 
-                <Checkout>checkout</Checkout>
+                <Checkout onClick={() => navigate("/checkout")}>
+                    checkout
+                </Checkout>
             </div>
         </CartWrapper>
     );
