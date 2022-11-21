@@ -21,10 +21,12 @@ const Layout: React.FC = () => {
     const ctx = useContext(MobileNavContext);
 
     const ModalTemplate = () => {
-        if (ctx.isCart) {
+        if (ctx.isCart || ctx.isMobileNav) {
             return (
                 <>
-                    <Cart />
+                    {ctx.isCart && <Cart />}
+                    {ctx.isMobileNav && <MobileMenu />}
+
                     <Backdrop
                         navInView={inView}
                         handleModal={ctx.handleModal}
@@ -32,19 +34,6 @@ const Layout: React.FC = () => {
                 </>
             );
         }
-
-        if (ctx.isMobileNav) {
-            return (
-                <>
-                    <MobileMenu />
-                    <Backdrop
-                        navInView={inView}
-                        handleModal={ctx.handleModal}
-                    />
-                </>
-            );
-        }
-
         return null;
     };
 

@@ -7,13 +7,16 @@ export const CartWrapper = styled.div`
     left: 50%;
     transform: translateX(-50%);
     min-width: 327px;
-    max-width: 377px;
     max-height: 488px;
     border-radius: 8px;
     z-index: 4;
 
     .inner-wrapper {
         padding: 2rem 1.5rem;
+
+        @media screen and (min-width: 768px) {
+            height: auto;
+        }
     }
 
     .heading {
@@ -47,7 +50,27 @@ export const CartWrapper = styled.div`
     .cart-items-wrapper {
         max-height: 300px;
         overflow-y: scroll;
+
+        /* @media screen and (min-width: 768px) {
+            max-height: 240px;
+        } */
+        /* @media screen and (min-width: 1280px) {
+            width: 80%;
+        } */
     }
+
+    @media screen and (min-width: 768px) {
+        min-width: 377px;
+        left: 65%;
+    }
+
+    @media screen and (min-width: 1280px) {
+        top: 20%;
+    }
+
+    /* @media screen and (min-width: 1440px) {
+        top: 10%;
+    } */
 `;
 
 export const CartDetails = styled.div`
@@ -93,6 +116,12 @@ export const CartDetails = styled.div`
         button {
             border: none;
             background: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            color: #d87d4a;
         }
 
         span {

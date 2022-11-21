@@ -10,7 +10,7 @@ import {
 import { getTotalPrice } from "../../Utils/cartUtils";
 import { getProductNameOnly } from "../../Utils/dataUtils";
 
-const CARTASSETS = [
+export const CARTASSETS = [
     {
         name: "yx1-earphones",
         path: "/assets/cart/image-yx1-earphones.jpg",
