@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const StyledHeader = styled.header<{ ref: any }>`
+export const StyledHeader = styled.header`
     background: #000;
     color: #fff;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 5;

@@ -1,3 +1,5 @@
+import { CARTASSETS } from "../components/Cart/Cart";
+
 export enum OperationType {
     DECREASE = "decrease",
     INCREASE = "increase",
@@ -45,10 +47,28 @@ export function updateAndReturnCartItems(
     return products;
 }
 
+export const findCartImgPath = (slug: string) => {
+    const path = CARTASSETS.find(asset => asset.name === slug);
+    return path?.path;
+};
+
 export const getTotalPrice = (cart: CartContentTypes[]) => {
     const cartQtys = cart.map(item => item.price * item.qty);
 
     const totalPrice = cartQtys.reduce((item1, item2) => item1 + item2);
 
     return totalPrice;
+};
+
+export const cartTotalSummary = (cart: CartContentTypes[]) => {
+    const cartTotalPrice = cart.length ? getTotalPrice(cart) : 0;
+    const grandTotal = cart.length ? getTotalPrice(cart) + 50 : 0;
+    const vat = cart.length ? (20 / 100) * getTotalPrice(cart) : 0;
+    const vatInt = parseInt(vat.toFixed()).toLocaleString();
+
+    return {
+        cartTotalPrice: cartTotalPrice.toLocaleString(),
+        grandTotal: grandTotal.toLocaleString(),
+        vatInt,
+    };
 };

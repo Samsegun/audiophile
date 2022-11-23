@@ -8,6 +8,18 @@ export const FormSection = styled.div`
     margin-top: 2rem;
 `;
 
+export const InputWrapper = styled.div<{ auto: boolean }>`
+    @media screen and (min-width: 768px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+
+        & > *:first-of-type {
+            grid-column: ${props => (props.auto ? "auto" : "1/3")};
+        }
+    }
+`;
+
 export const FormTitle = styled.div`
     font-weight: 700;
     font-size: 13px;
@@ -73,6 +85,23 @@ export const RadioWrapper = styled.div<{ active: boolean }>`
     padding: 1.125rem 1rem;
     border: 1px solid ${props => (props.active ? "#d87d4a" : "#cfcfcf")};
     border-radius: 8px;
+
+    @media screen and (min-width: 768px) {
+        &:first-of-type {
+            margin-top: 0;
+        }
+    }
+`;
+
+export const Emoney = styled.div`
+    @media screen and (min-width: 768px) {
+        display: flex;
+        gap: 1rem;
+
+        & > * {
+            flex-grow: 1;
+        }
+    }
 `;
 
 export const Cash = styled.div`
@@ -86,5 +115,11 @@ export const Cash = styled.div`
         font-size: 15px;
         line-height: 25px;
         opacity: 0.7;
+    }
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+        gap: 2rem;
+        text-align: left;
     }
 `;

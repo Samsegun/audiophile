@@ -6,13 +6,12 @@ import navIcon from "../../assets/mobile-nav.png";
 import logo from "../../assets/audiophile-logo.png";
 
 interface HeaderProps {
-    headRef: () => void;
     modalHandler: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ headRef, modalHandler }) => {
+const Header: React.FC<HeaderProps> = ({ modalHandler }) => {
     return (
-        <StyledHeader ref={headRef}>
+        <StyledHeader>
             <ContentWrapper flex={true}>
                 <div className='logo-menu'>
                     <button onClick={modalHandler.bind(null, "mobileNav")}>

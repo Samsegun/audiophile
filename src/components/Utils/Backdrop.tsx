@@ -5,10 +5,9 @@ import styled from "styled-components";
     not in view
 */
 
-const OverlayStyle = styled.div<{ navInView: boolean }>`
+const OverlayStyle = styled.div`
     position: fixed;
     top: 0;
-    /* top: ${props => (props.navInView ? "10%" : "0")}; */
     left: 0;
     width: 100%;
     background: rgba(0, 0, 0, 0.4);
@@ -18,12 +17,10 @@ const OverlayStyle = styled.div<{ navInView: boolean }>`
 `;
 
 const Backdrop: React.FC<{
-    navInView: boolean;
     handleModal: (a: string) => void;
-}> = ({ navInView, handleModal }) => {
+}> = ({ handleModal }) => {
     return (
         <OverlayStyle
-            navInView={navInView}
             onClick={handleModal.bind(null, "backdrop")}></OverlayStyle>
     );
 };

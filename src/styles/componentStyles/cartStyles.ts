@@ -161,4 +161,5 @@ export const Checkout = styled.button`
     letter-spacing: 1px;
     text-transform: uppercase;
     border: none;
+    cursor: pointer;
 `;

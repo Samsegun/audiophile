@@ -8,6 +8,7 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 import Backdrop from "../Utils/Backdrop";
 import { MobileNavContext } from "../../store/mobileNavContext";
 import Cart from "../Cart/Cart";
+import OrderConfirmation from "../OrderConfirmation";
 
 const AppWrapper = styled.div`
     position: relative;
@@ -21,25 +22,24 @@ const Layout: React.FC = () => {
     const ctx = useContext(MobileNavContext);
 
     const ModalTemplate = () => {
-        if (ctx.isCart || ctx.isMobileNav) {
+        if (ctx.isCart || ctx.isMobileNav || ctx.isConfirmation) {
             return (
                 <>
                     {ctx.isCart && <Cart />}
                     {ctx.isMobileNav && <MobileMenu />}
+                    {ctx.isConfirmation && <OrderConfirmation />}
 
-                    <Backdrop
-                        navInView={inView}
-                        handleModal={ctx.handleModal}
-                    />
+                    <Backdrop handleModal={ctx.handleModal} />
                 </>
             );
         }
+
         return null;
     };
 
     return (
         <AppWrapper>
-            <Header headRef={ref} modalHandler={ctx.handleModal} />
+            <Header modalHandler={ctx.handleModal} />
             <ModalTemplate />
             <div className='routes-wrapper'>
                 <Outlet />

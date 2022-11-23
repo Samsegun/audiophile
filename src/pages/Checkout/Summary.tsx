@@ -2,9 +2,9 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { CartDetails, Checkout } from "../../styles/componentStyles/cartStyles";
 import { CartContext } from "../../store/cartContext";
-import { CARTASSETS } from "../../components/Cart/Cart";
 import { getProductNameOnly } from "../../Utils/dataUtils";
-import { getTotalPrice } from "../../Utils/cartUtils";
+import { cartTotalSummary, findCartImgPath } from "../../Utils/cartUtils";
+import { MobileNavContext } from "../../store/mobileNavContext";
 
 const Wrapper = styled.section`
     margin: 2rem 0;
@@ -29,7 +29,7 @@ const Wrapper = styled.section`
     }
 `;
 
-const ItemQty = styled.div`
+export const ItemQty = styled.div`
     align-self: flex-start;
     font-weight: 700;
     font-size: 15px;
@@ -65,16 +65,8 @@ const ItemDetails = styled.div`
 
 const Summary = () => {
     const { cart } = useContext(CartContext);
-
-    const findCartImgPath = (slug: string) => {
-        const path = CARTASSETS.find(asset => asset.name === slug);
-        return path?.path;
-    };
-
-    const cartTotalPrice = cart.length ? getTotalPrice(cart) : 0;
-    const grandTotal = cart.length ? getTotalPrice(cart) + 50 : 0;
-    const vat = cart.length ? (20 / 100) * getTotalPrice(cart) : 0;
-    const vatInt = parseInt(vat.toFixed()).toLocaleString();
+    const { handleModal } = useContext(MobileNavContext);
+    const { cartTotalPrice, grandTotal, vatInt } = cartTotalSummary(cart);
 
     return (
         <Wrapper>
@@ -102,7 +94,7 @@ const Summary = () => {
             <div className='details'>
                 <ItemDetails>
                     <span>TOTAL</span>
-                    <span>$ {cartTotalPrice.toLocaleString()}</span>
+                    <span>$ {cartTotalPrice}</span>
                 </ItemDetails>
 
                 <ItemDetails>
@@ -117,11 +109,13 @@ const Summary = () => {
 
                 <ItemDetails>
                     <span>GRAND TOTAL</span>
-                    <span>$ {grandTotal.toLocaleString()}</span>
+                    <span>$ {grandTotal}</span>
                 </ItemDetails>
             </div>
 
-            <Checkout>continue &amp; pay</Checkout>
+            <Checkout onClick={handleModal.bind(null, "confirmation")}>
+                continue &amp; pay
+            </Checkout>
         </Wrapper>
     );
 };

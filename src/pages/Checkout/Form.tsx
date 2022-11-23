@@ -6,6 +6,8 @@ import {
     FormInput,
     Cash,
     RadioWrapper,
+    InputWrapper,
+    Emoney,
 } from "../../styles/componentStyles/form";
 
 const initialState = { emoney: false, cash: false };
@@ -37,7 +39,7 @@ const Form = () => {
     const PaymentType = () => {
         if (paymentMode.emoney) {
             return (
-                <>
+                <Emoney>
                     {/* emoney section */}
                     <FormInput>
                         <label htmlFor='e-number'>e-Money Number</label>
@@ -53,7 +55,7 @@ const Form = () => {
                         <label htmlFor='e-pin'>e-Money PIN</label>
                         <input type='number' id='e-pin' placeholder='6891' />
                     </FormInput>
-                </>
+                </Emoney>
             );
         }
 
@@ -90,56 +92,70 @@ const Form = () => {
                 {/* billing */}
                 <FormSection>
                     <FormTitle>billing details</FormTitle>
-                    <FormInput>
-                        <label htmlFor='name'>Name</label>
-                        <input type='text' id='name' placeholder='Sam Segun' />
-                    </FormInput>
 
-                    <FormInput>
-                        <label htmlFor='email'>Email Address</label>
-                        <input
-                            type='text'
-                            id='email'
-                            placeholder='Samsegun@email.com'
-                        />
-                    </FormInput>
+                    <InputWrapper auto={true}>
+                        <FormInput>
+                            <label htmlFor='name'>Name</label>
+                            <input
+                                type='text'
+                                id='name'
+                                placeholder='Sam Segun'
+                            />
+                        </FormInput>
 
-                    <FormInput>
-                        <label htmlFor='phone'>Phone Number</label>
-                        <input
-                            type={"tel"}
-                            id='phone'
-                            placeholder='+1 202-555-0136'
-                        />
-                    </FormInput>
+                        <FormInput>
+                            <label htmlFor='email'>Email Address</label>
+                            <input
+                                type='text'
+                                id='email'
+                                placeholder='Samsegun@email.com'
+                            />
+                        </FormInput>
+
+                        <FormInput>
+                            <label htmlFor='phone'>Phone Number</label>
+                            <input
+                                type={"tel"}
+                                id='phone'
+                                placeholder='+1 202-555-0136'
+                            />
+                        </FormInput>
+                    </InputWrapper>
                 </FormSection>
 
                 {/* shipping */}
                 <FormSection>
                     <FormTitle>shipping info</FormTitle>
-                    <FormInput>
-                        <label htmlFor='address'>Your Address</label>
-                        <input
-                            type='text'
-                            id='address'
-                            placeholder='1137 Williams Avenue'
-                        />
-                    </FormInput>
 
-                    <FormInput>
-                        <label htmlFor='zip'>ZIP Code</label>
-                        <input type='number' id='zip' placeholder='10001' />
-                    </FormInput>
+                    <InputWrapper auto={false}>
+                        <FormInput>
+                            <label htmlFor='address'>Your Address</label>
+                            <input
+                                type='text'
+                                id='address'
+                                placeholder='1137 Williams Avenue'
+                            />
+                        </FormInput>
 
-                    <FormInput>
-                        <label htmlFor='city'>City</label>
-                        <input type='text' id='city' placeholder='Lagos' />
-                    </FormInput>
+                        <FormInput>
+                            <label htmlFor='zip'>ZIP Code</label>
+                            <input type='number' id='zip' placeholder='10001' />
+                        </FormInput>
 
-                    <FormInput>
-                        <label htmlFor='country'>Country</label>
-                        <input type='text' id='country' placeholder='Nigeria' />
-                    </FormInput>
+                        <FormInput>
+                            <label htmlFor='city'>City</label>
+                            <input type='text' id='city' placeholder='Lagos' />
+                        </FormInput>
+
+                        <FormInput>
+                            <label htmlFor='country'>Country</label>
+                            <input
+                                type='text'
+                                id='country'
+                                placeholder='Nigeria'
+                            />
+                        </FormInput>
+                    </InputWrapper>
                 </FormSection>
 
                 {/* payment */}
@@ -147,29 +163,33 @@ const Form = () => {
                     <FormTitle>payment details</FormTitle>
 
                     <FormInput>
-                        <span>Payment Method</span>
+                        <InputWrapper auto={true}>
+                            <span>Payment Method</span>
 
-                        <div className='radios'>
-                            <RadioWrapper active={paymentMode.emoney}>
-                                <input
-                                    type='radio'
-                                    id='emoney'
-                                    name='payment_method'
-                                    value='emoney'
-                                />
-                                <label htmlFor='emoney'>e-Money</label>
-                            </RadioWrapper>
+                            <div className='radios'>
+                                <RadioWrapper active={paymentMode.emoney}>
+                                    <input
+                                        type='radio'
+                                        id='emoney'
+                                        name='payment_method'
+                                        value='emoney'
+                                    />
+                                    <label htmlFor='emoney'>e-Money</label>
+                                </RadioWrapper>
 
-                            <RadioWrapper active={paymentMode.cash}>
-                                <input
-                                    type='radio'
-                                    id='cash'
-                                    name='payment_method'
-                                    value='cash'
-                                />
-                                <label htmlFor='cash'>Cash on Delivery</label>
-                            </RadioWrapper>
-                        </div>
+                                <RadioWrapper active={paymentMode.cash}>
+                                    <input
+                                        type='radio'
+                                        id='cash'
+                                        name='payment_method'
+                                        value='cash'
+                                    />
+                                    <label htmlFor='cash'>
+                                        Cash on Delivery
+                                    </label>
+                                </RadioWrapper>
+                            </div>
+                        </InputWrapper>
                     </FormInput>
 
                     <PaymentType />
