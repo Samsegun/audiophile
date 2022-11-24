@@ -18,15 +18,39 @@ const AppWrapper = styled.div`
 `;
 
 const Layout: React.FC = () => {
-    const { ref, inView } = useInView();
+    // const { ref, inView } = useInView();
     const ctx = useContext(MobileNavContext);
 
     const ModalTemplate = () => {
-        if (ctx.isCart || ctx.isMobileNav || ctx.isConfirmation) {
+        if (ctx.isCart) {
             return (
                 <>
                     {ctx.isCart && <Cart />}
+                    {/* {ctx.isMobileNav && <MobileMenu />}
+                    {ctx.isConfirmation && <OrderConfirmation />} */}
+
+                    <Backdrop handleModal={ctx.handleModal} />
+                </>
+            );
+        }
+
+        if (ctx.isMobileNav) {
+            return (
+                <>
+                    {/* {ctx.isCart && <Cart />} */}
                     {ctx.isMobileNav && <MobileMenu />}
+                    {/* {ctx.isConfirmation && <OrderConfirmation />} */}
+
+                    <Backdrop handleModal={ctx.handleModal} />
+                </>
+            );
+        }
+
+        if (ctx.isConfirmation) {
+            return (
+                <>
+                    {/* {ctx.isCart && <Cart />} */}
+                    {/* {ctx.isMobileNav && <MobileMenu />} */}
                     {ctx.isConfirmation && <OrderConfirmation />}
 
                     <Backdrop handleModal={ctx.handleModal} />

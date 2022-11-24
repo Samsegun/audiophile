@@ -51,12 +51,12 @@ const reducer = (state: State, action: ModalAction) => {
 
         case ActionKind.MOBILENAV:
             // an extra check to close cart or confirmation if open
-            if (state.isCart || state.isConfirmation)
-                return {
-                    isCart: false,
-                    isMobileNav: false,
-                    isConfirmation: false,
-                };
+            // if (state.isCart || state.isConfirmation)
+            //     return {
+            //         isCart: false,
+            //         isMobileNav: false,
+            //         isConfirmation: false,
+            //     };
             return {
                 isMobileNav: !state.isMobileNav,
                 isCart: false,
@@ -65,12 +65,12 @@ const reducer = (state: State, action: ModalAction) => {
 
         case ActionKind.CONFIRMATION:
             // an extra check to close cart or mobile-nav if open
-            if (state.isCart || state.isMobileNav)
-                return {
-                    isCart: false,
-                    isMobileNav: false,
-                    isConfirmation: false,
-                };
+            // if (state.isCart || state.isMobileNav)
+            //     return {
+            //         isCart: false,
+            //         isMobileNav: false,
+            //         isConfirmation: false,
+            //     };
             return {
                 isConfirmation: !state.isConfirmation,
                 isCart: false,
@@ -97,6 +97,8 @@ const MobileNavContextProvider: React.FC<{ children: React.ReactNode }> = ({
     const handleModal = (a?: string) => {
         dispatchFn({ type: a });
     };
+
+    // console.log()
 
     const contextValue = {
         isCart: ctxState.isCart,

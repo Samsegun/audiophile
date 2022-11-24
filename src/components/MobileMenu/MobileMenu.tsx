@@ -1,5 +1,8 @@
+import { useOnClickOutside } from "usehooks-ts";
+import { useContext, useRef } from "react";
 import styled from "styled-components";
 import ProductCategories from "../ProductsCategories/ProductCategories";
+import { MobileNavContext } from "../../store/mobileNavContext";
 
 // const Placeholder = styled.div`
 //     position: relative;
@@ -29,9 +32,14 @@ const Wrapper = styled.section`
 `;
 
 const MobileMenu = () => {
+    const { handleModal } = useContext(MobileNavContext);
+    const ref = useRef(null);
+
+    useOnClickOutside(ref, handleModal.bind(null, "backdrop"));
+
     return (
         // <Placeholder>
-        <OuterWrapper>
+        <OuterWrapper ref={ref}>
             <Wrapper>
                 <ProductCategories />
             </Wrapper>

@@ -1,5 +1,5 @@
-import { StyledHeader } from "../../styles/componentStyles/header";
 import { Link } from "react-router-dom";
+import { StyledHeader } from "../../styles/componentStyles/header";
 import { ContentWrapper } from "../../styles/global-styles";
 import cartIcon from "../../assets/cart-icon.png";
 import navIcon from "../../assets/mobile-nav.png";
@@ -41,6 +41,7 @@ const Header: React.FC<HeaderProps> = ({ modalHandler }) => {
                 </nav>
 
                 <button
+                    // ref={ref}
                     className='cart-icon'
                     onClick={modalHandler.bind(null, "cart")}>
                     <img className='cart-icon' src={cartIcon} alt='cart' />

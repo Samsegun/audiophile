@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useOnClickOutside } from "usehooks-ts";
+import { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../store/cartContext";
 import {
@@ -9,6 +10,7 @@ import {
 } from "../../styles/componentStyles/cartStyles";
 import { getTotalPrice } from "../../Utils/cartUtils";
 import { getProductNameOnly } from "../../Utils/dataUtils";
+import { MobileNavContext } from "../../store/mobileNavContext";
 
 export const CARTASSETS = [
     {
@@ -39,18 +41,21 @@ export const CARTASSETS = [
 
 const Cart = () => {
     const { cart, qtyHandler, resetCart } = useContext(CartContext);
+    const { handleModal } = useContext(MobileNavContext);
     const navigate = useNavigate();
+    const ref = useRef(null);
 
     const findCartImgPath = (slug: string) => {
         const path = CARTASSETS.find(asset => asset.name === slug);
-
         return path?.path;
     };
 
     const cartTotalPrice = cart.length ? getTotalPrice(cart) : 0;
 
+    useOnClickOutside(ref, handleModal.bind(null, "backdrop"));
+
     return (
-        <CartWrapper>
+        <CartWrapper ref={ref}>
             <div className='inner-wrapper'>
                 <div className='heading'>
                     <h2>cart ({cart.length})</h2>

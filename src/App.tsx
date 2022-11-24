@@ -12,30 +12,15 @@ import Checkout from "./pages/Checkout";
 function App() {
     return (
         <div className='app'>
-            <MobileNavContextProvider>
-                <CartContextProvider>
-                    <GlobalStylesAndFonts />
-                    <BrowserRouter>
-                        <Routes>
-                            <Route path='/' element={<Layout />}>
-                                <Route index element={<Home />} />
-                                <Route
-                                    path='/category/:id'
-                                    element={<Category />}
-                                />
-                                <Route
-                                    path='/category/:id/:id'
-                                    element={<Product />}
-                                />
-                                <Route
-                                    path='/checkout'
-                                    element={<Checkout />}
-                                />
-                            </Route>
-                        </Routes>
-                    </BrowserRouter>
-                </CartContextProvider>
-            </MobileNavContextProvider>
+            <GlobalStylesAndFonts />
+            <Routes>
+                <Route path='/' element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path='/category/:id' element={<Category />} />
+                    <Route path='/category/:id/:id' element={<Product />} />
+                    <Route path='/checkout' element={<Checkout />} />
+                </Route>
+            </Routes>
         </div>
     );
 }
