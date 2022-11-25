@@ -4,20 +4,17 @@ import styled from "styled-components";
 import ProductCategories from "../ProductsCategories/ProductCategories";
 import { MobileNavContext } from "../../store/mobileNavContext";
 
-// const Placeholder = styled.div`
-//     position: relative;
-//     padding-top: 5.5rem;
-// `;
-
 const OuterWrapper = styled.div`
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    max-height: 100vh;
     box-shadow: 0 10px 15px rgba(75, 75, 75, 0.6);
     z-index: 4;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
+    overflow-y: scroll;
 `;
 
 const Wrapper = styled.section`
@@ -32,19 +29,12 @@ const Wrapper = styled.section`
 `;
 
 const MobileMenu = () => {
-    const { handleModal } = useContext(MobileNavContext);
-    const ref = useRef(null);
-
-    useOnClickOutside(ref, handleModal.bind(null, "backdrop"));
-
     return (
-        // <Placeholder>
-        <OuterWrapper ref={ref}>
+        <OuterWrapper>
             <Wrapper>
                 <ProductCategories />
             </Wrapper>
         </OuterWrapper>
-        // </Placeholder>
     );
 };
 

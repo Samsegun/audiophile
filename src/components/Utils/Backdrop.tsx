@@ -14,6 +14,7 @@ const OverlayStyle = styled.div`
     min-height: 100vh;
     z-index: 3;
     transition: all 300ms ease-in-out;
+    cursor: pointer;
 `;
 
 const Backdrop: React.FC<{

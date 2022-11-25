@@ -6,7 +6,7 @@ import navIcon from "../../assets/mobile-nav.png";
 import logo from "../../assets/audiophile-logo.png";
 
 interface HeaderProps {
-    modalHandler: () => void;
+    modalHandler: (a: string) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ modalHandler }) => {
@@ -41,7 +41,6 @@ const Header: React.FC<HeaderProps> = ({ modalHandler }) => {
                 </nav>
 
                 <button
-                    // ref={ref}
                     className='cart-icon'
                     onClick={modalHandler.bind(null, "cart")}>
                     <img className='cart-icon' src={cartIcon} alt='cart' />

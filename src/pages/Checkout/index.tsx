@@ -1,5 +1,7 @@
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { MobileNavContext } from "../../store/mobileNavContext";
 import { ContentWrapper } from "../../styles/global-styles";
 import Form from "./Form";
 import Summary from "./Summary";
@@ -59,6 +61,12 @@ const FormContent = styled.div`
 
 const Checkout = () => {
     const navigate = useNavigate();
+    const { handleModal } = useContext(MobileNavContext);
+
+    useEffect(() => {
+        handleModal("backdrop");
+        window.scrollTo({ top: 0 });
+    }, []);
 
     return (
         <PageWrapper>

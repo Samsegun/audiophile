@@ -13,6 +13,10 @@ body::-webkit-scrollbar-track {
     background: rgb(29, 30, 38);
 }
 
+#modal-wrapper {
+    position: relative;
+}
+
 
 .app  input[type="radio"] {
     width: 20px;

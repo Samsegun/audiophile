@@ -1,5 +1,6 @@
 import { useInView } from "react-intersection-observer";
 import React, { useContext } from "react";
+import { createPortal } from "react-dom";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
@@ -22,35 +23,11 @@ const Layout: React.FC = () => {
     const ctx = useContext(MobileNavContext);
 
     const ModalTemplate = () => {
-        if (ctx.isCart) {
+        if (ctx.isCart || ctx.isMobileNav || ctx.isConfirmation) {
             return (
                 <>
                     {ctx.isCart && <Cart />}
-                    {/* {ctx.isMobileNav && <MobileMenu />}
-                    {ctx.isConfirmation && <OrderConfirmation />} */}
-
-                    <Backdrop handleModal={ctx.handleModal} />
-                </>
-            );
-        }
-
-        if (ctx.isMobileNav) {
-            return (
-                <>
-                    {/* {ctx.isCart && <Cart />} */}
                     {ctx.isMobileNav && <MobileMenu />}
-                    {/* {ctx.isConfirmation && <OrderConfirmation />} */}
-
-                    <Backdrop handleModal={ctx.handleModal} />
-                </>
-            );
-        }
-
-        if (ctx.isConfirmation) {
-            return (
-                <>
-                    {/* {ctx.isCart && <Cart />} */}
-                    {/* {ctx.isMobileNav && <MobileMenu />} */}
                     {ctx.isConfirmation && <OrderConfirmation />}
 
                     <Backdrop handleModal={ctx.handleModal} />
@@ -65,6 +42,10 @@ const Layout: React.FC = () => {
         <AppWrapper>
             <Header modalHandler={ctx.handleModal} />
             <ModalTemplate />
+            {/* {createPortal(
+                <ModalTemplate />,
+                document.getElementById("modal-wrapper") as HTMLElement
+            )} */}
             <div className='routes-wrapper'>
                 <Outlet />
             </div>

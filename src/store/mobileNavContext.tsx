@@ -17,7 +17,14 @@ interface State {
     isConfirmation: boolean;
 }
 
-export const MobileNavContext = React.createContext({
+interface ContextState {
+    isCart: boolean;
+    isMobileNav: boolean;
+    isConfirmation: boolean;
+    handleModal: (a: string) => void;
+}
+
+export const MobileNavContext = React.createContext<ContextState>({
     isCart: false,
     isMobileNav: false,
     isConfirmation: false,
@@ -51,12 +58,12 @@ const reducer = (state: State, action: ModalAction) => {
 
         case ActionKind.MOBILENAV:
             // an extra check to close cart or confirmation if open
-            // if (state.isCart || state.isConfirmation)
-            //     return {
-            //         isCart: false,
-            //         isMobileNav: false,
-            //         isConfirmation: false,
-            //     };
+            if (state.isCart || state.isConfirmation)
+                return {
+                    isCart: false,
+                    isMobileNav: false,
+                    isConfirmation: false,
+                };
             return {
                 isMobileNav: !state.isMobileNav,
                 isCart: false,
@@ -65,12 +72,12 @@ const reducer = (state: State, action: ModalAction) => {
 
         case ActionKind.CONFIRMATION:
             // an extra check to close cart or mobile-nav if open
-            // if (state.isCart || state.isMobileNav)
-            //     return {
-            //         isCart: false,
-            //         isMobileNav: false,
-            //         isConfirmation: false,
-            //     };
+            if (state.isCart || state.isMobileNav)
+                return {
+                    isCart: false,
+                    isMobileNav: false,
+                    isConfirmation: false,
+                };
             return {
                 isConfirmation: !state.isConfirmation,
                 isCart: false,
@@ -94,11 +101,9 @@ const MobileNavContextProvider: React.FC<{ children: React.ReactNode }> = ({
         initialState
     );
 
-    const handleModal = (a?: string) => {
+    const handleModal = (a: string) => {
         dispatchFn({ type: a });
     };
-
-    // console.log()
 
     const contextValue = {
         isCart: ctxState.isCart,
