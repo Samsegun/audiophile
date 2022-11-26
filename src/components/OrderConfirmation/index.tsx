@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Checked from "../../assets/checked.png";
-import { ItemQty } from "../../pages/Checkout/Summary";
 import { CartContext } from "../../store/cartContext";
-import { CartDetails, Checkout } from "../../styles/componentStyles/cartStyles";
-import { OrderWrapper } from "../../styles/componentStyles/confirmationStyles";
-import { cartTotalSummary, findCartImgPath } from "../../Utils/cartUtils";
-import { getProductNameOnly } from "../../Utils/dataUtils";
+import { Checkout } from "../../styles/componentStyles/cartStyles";
+import {
+    ItemsTotal,
+    OrderWrapper,
+} from "../../styles/componentStyles/confirmationStyles";
+import { cartTotalSummary } from "../../Utils/cartUtils";
+import CartItemsBody from "./OrderItems";
 
 const OrderConfirmation = () => {
     const { cart } = useContext(CartContext);
@@ -27,38 +29,16 @@ const OrderConfirmation = () => {
                 You will receive an email confirmation shortly.
             </p>
 
-            <div className='items-total'>
+            <ItemsTotal>
                 <div className='cart-items'>
-                    {cart.map((item, idx) => {
-                        return (
-                            <CartDetails key={idx}>
-                                <div className='img-name'>
-                                    <img
-                                        src={findCartImgPath(item.slug)}
-                                        alt=''
-                                    />
-
-                                    <h3>
-                                        {getProductNameOnly(item.name)}
-                                        <span>
-                                            $ {item.price.toLocaleString()}
-                                        </span>
-                                    </h3>
-                                </div>
-
-                                <ItemQty>
-                                    <span>x{item.qty}</span>
-                                </ItemQty>
-                            </CartDetails>
-                        );
-                    })}
+                    <CartItemsBody />
                 </div>
 
                 <div className='total'>
                     <h2>grand total</h2>
                     <span>$ {cartTotalPrice}</span>
                 </div>
-            </div>
+            </ItemsTotal>
 
             <Checkout onClick={() => navigate("/")}>Back to home</Checkout>
         </OrderWrapper>

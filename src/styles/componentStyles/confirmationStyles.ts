@@ -9,9 +9,22 @@ export const OrderWrapper = styled.section`
     z-index: 4;
     width: 90%;
     max-width: 540px;
+    max-height: 80vh;
+    overflow-y: scroll;
     margin: auto;
     padding: 2rem;
     border-radius: 8px;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+        border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #d87d4a;
+        border-radius: 8px;
+        border: 3px solid #d87d4a;
+    }
 
     h1 {
         font-weight: 700;
@@ -29,28 +42,33 @@ export const OrderWrapper = styled.section`
         opacity: 0.7;
     }
 
-    .items-total {
-        margin-bottom: 1.5rem;
+    @media screen and (min-width: 768px) {
+        top: 20%;
+        max-height: 75vh;
+    }
+`;
 
-        @media screen and (min-width: 768px) {
-            display: flex;
-            margin: 1.5rem 0;
+export const ItemsTotal = styled.div`
+    margin-bottom: 1.5rem;
 
-            & > * {
-                flex-grow: 1;
-            }
+    @media screen and (min-width: 768px) {
+        display: flex;
+        margin: 1.5rem 0;
+
+        & > * {
+            flex-grow: 1;
         }
+    }
 
-        @media screen and (min-width: 1280px) {
-            max-height: 270px;
-        }
+    @media screen and (min-width: 1280px) {
+        max-height: auto;
     }
 
     .cart-items {
         background: #f1f1f1;
         padding: 0.5rem 1.5rem;
-        max-height: 150px;
-        overflow-y: scroll;
+        /* max-height: 150px;
+        overflow-y: scroll; */
 
         @media screen and (min-width: 1280px) {
             max-height: inherit;
@@ -81,7 +99,7 @@ export const OrderWrapper = styled.section`
         @media screen and (min-width: 768px) {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: end;
             border-radius: 0px 8px 8px 0px;
         }
 

@@ -51,12 +51,16 @@ export const CartWrapper = styled.div`
         max-height: 300px;
         overflow-y: scroll;
 
-        /* @media screen and (min-width: 768px) {
-            max-height: 240px;
-        } */
-        /* @media screen and (min-width: 1280px) {
-            width: 80%;
-        } */
+        &::-webkit-scrollbar {
+            width: 4px;
+            border-radius: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #d87d4a;
+            border-radius: 8px;
+            border: 3px solid #d87d4a;
+        }
     }
 
     @media screen and (min-width: 768px) {
@@ -67,10 +71,6 @@ export const CartWrapper = styled.div`
     @media screen and (min-width: 1280px) {
         top: 20%;
     }
-
-    /* @media screen and (min-width: 1440px) {
-        top: 10%;
-    } */
 `;
 
 export const CartDetails = styled.div`

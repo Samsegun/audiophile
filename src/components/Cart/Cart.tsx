@@ -7,7 +7,7 @@ import {
     Total,
     Checkout,
 } from "../../styles/componentStyles/cartStyles";
-import { getTotalPrice } from "../../Utils/cartUtils";
+import { findCartImgPath, getTotalPrice } from "../../Utils/cartUtils";
 import { getProductNameOnly } from "../../Utils/dataUtils";
 
 export const CARTASSETS = [
@@ -40,11 +40,6 @@ export const CARTASSETS = [
 const Cart = () => {
     const { cart, qtyHandler, resetCart } = useContext(CartContext);
     const navigate = useNavigate();
-
-    const findCartImgPath = (slug: string) => {
-        const path = CARTASSETS.find(asset => asset.name === slug);
-        return path?.path;
-    };
 
     const cartTotalPrice = cart.length ? getTotalPrice(cart) : 0;
 
