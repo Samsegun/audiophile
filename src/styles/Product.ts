@@ -304,6 +304,13 @@ export const CartButtons = styled.div`
 
         button {
             border: none;
+            background: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            color: #d87d4a;
         }
     }
     .cart-btn {

@@ -8,14 +8,13 @@ import {
     BoxContent,
     Gallery,
     ListItem,
-    OtherProducts,
     FeaturesAndContent,
 } from "../../styles/Product";
 import { findSingleProduct, splitParagraph } from "../../Utils/dataUtils";
 import ProductAndCartDetails from "./ProductAndCartDetails";
-import { Button } from "../../styles/Button";
 import ProductCategories from "../../components/ProductsCategories/ProductCategories";
 import About from "../../components/About/About";
+import OtherProduct from "./OtherProducts";
 
 interface GalleryPropType {
     mobile: string;
@@ -140,43 +139,10 @@ const Product: React.FC = () => {
                     </div>
                 </Gallery>
 
-                <OtherProducts>
-                    <>
-                        <Heading>you may also like</Heading>
-
-                        <div className='product-wrapper'>
-                            {product[0].others.map((other, idx) => {
-                                return (
-                                    <div className='product' key={idx}>
-                                        <picture>
-                                            <source
-                                                srcSet={other.image.desktop}
-                                                media='(min-width: 1280px)'
-                                            />
-                                            <source
-                                                srcSet={other.image.tablet}
-                                                media='(min-width: 768px)'
-                                            />
-                                            <source
-                                                srcSet={other.image.mobile}
-                                            />
-                                            <img
-                                                src={other.image.mobile}
-                                                alt={other.name}
-                                            />
-                                        </picture>
-
-                                        <h3>{other.name}</h3>
-
-                                        <Button bgColor='#D87D4A'>
-                                            see product
-                                        </Button>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </>
-                </OtherProducts>
+                <OtherProduct
+                    product={product[0].others}
+                    category={product[0].category}
+                />
 
                 <ProductCategories />
 

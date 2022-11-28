@@ -27,6 +27,8 @@ const CartItemsBody = () => {
     const [showMore, setShowMore] = useState(false);
     const { cart } = useContext(CartContext);
 
+    const cartLength = cart.length ? cart.length - 1 : 0;
+
     const OrderItems = () => {
         if (!showMore && cart.length) {
             return (
@@ -78,9 +80,7 @@ const CartItemsBody = () => {
             <hr />
 
             <button onClick={() => setShowMore(prev => !prev)}>
-                {showMore
-                    ? "View less"
-                    : `and ${cart.length - 1} other item(s)`}
+                {showMore ? "View less" : `and ${cartLength} other item(s)`}
             </button>
         </CartItemsBox>
     );

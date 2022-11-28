@@ -1,3 +1,4 @@
+import { NavigateFunction } from "react-router-dom";
 import appData from "../data.json";
 
 export function filterAndOrderData(id: string | undefined = "") {
@@ -71,4 +72,13 @@ export function getProductNameOnly(name: string) {
     let splitName = name.split(" ");
 
     return splitName[0];
+}
+
+export function navigateOtherProducts(
+    slug: string,
+    navigate: NavigateFunction
+) {
+    const product = appData.find(data => data.slug === slug);
+
+    navigate(`/category/${product?.category}/${product?.slug}`);
 }

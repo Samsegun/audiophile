@@ -15,7 +15,10 @@ export interface CartContentTypes {
 
 export interface CartContextTypes {
     cart: CartContentTypes[];
+    cartNotification: boolean;
+    closeNotification: () => void;
     addToCart: (price: number, slug: string, name: string, qty: number) => void;
+    removeCartItem: (slug: string) => void;
     resetCart: (cart: CartContentTypes[]) => void;
     qtyHandler: (
         operation: string,

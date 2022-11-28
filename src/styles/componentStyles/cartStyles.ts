@@ -104,6 +104,10 @@ export const CartDetails = styled.div`
                 display: block;
             }
         }
+
+        @media screen and (min-width: 1280px) {
+            flex-basis: 80%;
+        }
     }
 
     .qty {

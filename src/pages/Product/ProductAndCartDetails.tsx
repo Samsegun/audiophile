@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../store/cartContext";
 import { Wrapper, ProductText, CartButtons } from "../../styles/Product";
 import { updateAndReturnCartItems } from "../../Utils/cartUtils";
@@ -33,7 +33,14 @@ interface Props {
 const ProductAndCartDetails: React.FC<Props> = ({ item }) => {
     const [qty, setQty] = useState<number>(1);
 
-    const { addToCart, cart, resetCart } = useContext(CartContext);
+    // this useEffect ensures qty starts from
+    // one when page renders
+    useEffect(() => {
+        setQty(1);
+    }, [item[0].slug]);
+
+    const { addToCart, removeCartItem, cart, resetCart } =
+        useContext(CartContext);
 
     const productDetails = () => {
         const queriedItem = cart.find(
@@ -79,6 +86,31 @@ const ProductAndCartDetails: React.FC<Props> = ({ item }) => {
                 setQty(qty + 1);
             }
         }
+    };
+
+    const AddOrRemoveItem: React.JSXElementConstructor<{
+        price: number;
+        slug: string;
+        name: string;
+        qty: number;
+    }> = ({ price, slug, name, qty }) => {
+        if (cart.find(item => item.slug === slug)) {
+            return (
+                <button
+                    className='cart-btn'
+                    onClick={removeCartItem.bind(null, slug)}>
+                    remove from cart
+                </button>
+            );
+        }
+
+        return (
+            <button
+                className='cart-btn'
+                onClick={addToCart.bind(null, price, slug, name, qty)}>
+                add to cart
+            </button>
+        );
     };
 
     return (
@@ -136,17 +168,12 @@ const ProductAndCartDetails: React.FC<Props> = ({ item }) => {
                         </button>
                     </div>
 
-                    <button
-                        className='cart-btn'
-                        onClick={addToCart.bind(
-                            null,
-                            product.price,
-                            product.slug,
-                            product.name,
-                            product.qty
-                        )}>
-                        add to cart
-                    </button>
+                    <AddOrRemoveItem
+                        price={product.price}
+                        slug={product.slug}
+                        name={product.name}
+                        qty={product.qty}
+                    />
                 </CartButtons>
             </ProductText>
         </Wrapper>

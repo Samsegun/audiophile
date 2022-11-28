@@ -64,7 +64,15 @@ export const StyledHeader = styled.header`
     }
 
     .cart-icon {
+        position: relative;
         transition: all 300ms ease;
+
+        span {
+            position: absolute;
+            top: -10px;
+            left: 25px;
+            color: #d87d4a;
+        }
     }
     .cart-icon:hover {
         transform: scale(1.1);

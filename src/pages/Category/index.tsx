@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
     ProductSection,
@@ -10,15 +10,18 @@ import { ContentWrapper } from "../../styles/global-styles";
 import Categories from "../Home/Categories";
 import { filterAndOrderData, splitName } from "../../Utils/dataUtils";
 import About from "../../components/About/About";
+import { MobileNavContext } from "../../store/mobileNavContext";
 
 const Category = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { handleModal } = useContext(MobileNavContext);
 
     useEffect(() => {
         // scroll to the top when page renders
-
         window.scrollTo({ top: 0 });
+
+        handleModal("backdrop");
     }, [id]);
 
     const orderedCategoryData = filterAndOrderData(id);
