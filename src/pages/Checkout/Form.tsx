@@ -1,4 +1,5 @@
-import React, { useReducer, useState } from "react";
+import React, { useContext, useReducer, useState } from "react";
+import { MobileNavContext } from "../../store/mobileNavContext";
 import {
     FormWrapper,
     FormSection,
@@ -8,11 +9,34 @@ import {
     RadioWrapper,
     InputWrapper,
     Emoney,
+    CheckOutForm,
 } from "../../styles/componentStyles/form";
+import Summary from "./Summary";
 
-const initialState = { emoney: false, cash: false };
+interface StateProps {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+    zip: string;
+    city: string;
+    country: string;
+    paymentMethod: string;
+}
 
-const reducer = (state: {}, action: { type: string }) => {
+const paymentState = { emoney: false, cash: false };
+const formState = {
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    zip: "",
+    city: "",
+    country: "",
+    paymentMethod: "",
+};
+
+const paymentReducer = (state: {}, action: { type: string }) => {
     switch (action.type) {
         case "emoney":
             return { cash: false, emoney: true };
@@ -24,16 +48,64 @@ const reducer = (state: {}, action: { type: string }) => {
     }
 };
 
+const formReducer = (
+    state: StateProps,
+    action: { type: string; value: string }
+) => {
+    switch (action.type) {
+        case "name":
+            return { ...state, name: action.value };
+        case "email":
+            return { ...state, email: action.value };
+        case "phone":
+            return { ...state, phone: action.value };
+        case "address":
+            return { ...state, address: action.value };
+        case "zip":
+            return { ...state, zip: action.value };
+        case "city":
+            return { ...state, city: action.value };
+        case "country":
+            return { ...state, country: action.value };
+        case "paymentMethod":
+            return { ...state, paymentMethod: action.value };
+
+        default:
+            return;
+    }
+};
+
 const Form = () => {
     const [paymentMode, dispatchFn] = useReducer<React.Reducer<any, any>>(
-        reducer,
-        initialState
+        paymentReducer,
+        paymentState
     );
+    const [formStates, dispatchFormFn] = useReducer<React.Reducer<any, any>>(
+        formReducer,
+        formState
+    );
+    const { handleModal } = useContext(MobileNavContext);
 
     const formHandler = (event: React.ChangeEvent<HTMLFormElement>) => {
         if (event.target.name === "payment_method") {
             dispatchFn({ type: event.target.value });
         }
+
+        if (event.target.name !== "payment_method") {
+            dispatchFormFn({
+                type: event.target.name,
+                value: event.target.value,
+            });
+        }
+    };
+
+    const submitHandler = () => {
+        console.log(formStates);
+    };
+
+    const checkOutHandler = () => {
+        handleModal("confirmation");
+        submitHandler();
     };
 
     const PaymentType = () => {
@@ -88,113 +160,133 @@ const Form = () => {
 
     return (
         <FormWrapper>
-            <form onChange={formHandler}>
-                {/* billing */}
-                <FormSection>
-                    <FormTitle>billing details</FormTitle>
+            <CheckOutForm onChange={formHandler}>
+                <div className='form-inputs'>
+                    <h1 className='heading'>checkout</h1>
+                    {/* billing */}
+                    <FormSection>
+                        <FormTitle>billing details</FormTitle>
 
-                    <InputWrapper auto={true}>
-                        <FormInput>
-                            <label htmlFor='name'>Name</label>
-                            <input
-                                type='text'
-                                id='name'
-                                placeholder='Sam Segun'
-                            />
-                        </FormInput>
-
-                        <FormInput>
-                            <label htmlFor='email'>Email Address</label>
-                            <input
-                                type='text'
-                                id='email'
-                                placeholder='Samsegun@email.com'
-                            />
-                        </FormInput>
-
-                        <FormInput>
-                            <label htmlFor='phone'>Phone Number</label>
-                            <input
-                                type={"tel"}
-                                id='phone'
-                                placeholder='+1 202-555-0136'
-                            />
-                        </FormInput>
-                    </InputWrapper>
-                </FormSection>
-
-                {/* shipping */}
-                <FormSection>
-                    <FormTitle>shipping info</FormTitle>
-
-                    <InputWrapper auto={false}>
-                        <FormInput>
-                            <label htmlFor='address'>Your Address</label>
-                            <input
-                                type='text'
-                                id='address'
-                                placeholder='1137 Williams Avenue'
-                            />
-                        </FormInput>
-
-                        <FormInput>
-                            <label htmlFor='zip'>ZIP Code</label>
-                            <input type='number' id='zip' placeholder='10001' />
-                        </FormInput>
-
-                        <FormInput>
-                            <label htmlFor='city'>City</label>
-                            <input type='text' id='city' placeholder='Lagos' />
-                        </FormInput>
-
-                        <FormInput>
-                            <label htmlFor='country'>Country</label>
-                            <input
-                                type='text'
-                                id='country'
-                                placeholder='Nigeria'
-                            />
-                        </FormInput>
-                    </InputWrapper>
-                </FormSection>
-
-                {/* payment */}
-                <FormSection>
-                    <FormTitle>payment details</FormTitle>
-
-                    <FormInput>
                         <InputWrapper auto={true}>
-                            <span>Payment Method</span>
+                            <FormInput>
+                                <label htmlFor='name'>Name</label>
+                                <input
+                                    type='text'
+                                    id='name'
+                                    name='name'
+                                    placeholder='Sam Segun'
+                                />
+                            </FormInput>
 
-                            <div className='radios'>
-                                <RadioWrapper active={paymentMode.emoney}>
-                                    <input
-                                        type='radio'
-                                        id='emoney'
-                                        name='payment_method'
-                                        value='emoney'
-                                    />
-                                    <label htmlFor='emoney'>e-Money</label>
-                                </RadioWrapper>
+                            <FormInput>
+                                <label htmlFor='email'>Email Address</label>
+                                <input
+                                    type='text'
+                                    id='email'
+                                    name='email'
+                                    placeholder='Samsegun@email.com'
+                                />
+                            </FormInput>
 
-                                <RadioWrapper active={paymentMode.cash}>
-                                    <input
-                                        type='radio'
-                                        id='cash'
-                                        name='payment_method'
-                                        value='cash'
-                                    />
-                                    <label htmlFor='cash'>
-                                        Cash on Delivery
-                                    </label>
-                                </RadioWrapper>
-                            </div>
+                            <FormInput>
+                                <label htmlFor='phone'>Phone Number</label>
+                                <input
+                                    type={"tel"}
+                                    id='phone'
+                                    name='phone'
+                                    placeholder='+1 202-555-0136'
+                                />
+                            </FormInput>
                         </InputWrapper>
-                    </FormInput>
+                    </FormSection>
 
-                    <PaymentType />
-                </FormSection>
-            </form>
+                    {/* shipping */}
+                    <FormSection>
+                        <FormTitle>shipping info</FormTitle>
+
+                        <InputWrapper auto={false}>
+                            <FormInput>
+                                <label htmlFor='address'>Your Address</label>
+                                <input
+                                    type='text'
+                                    id='address'
+                                    name='address'
+                                    placeholder='1137 Williams Avenue'
+                                />
+                            </FormInput>
+
+                            <FormInput>
+                                <label htmlFor='zip'>ZIP Code</label>
+                                <input
+                                    type='number'
+                                    id='zip'
+                                    name='zip'
+                                    placeholder='10001'
+                                />
+                            </FormInput>
+
+                            <FormInput>
+                                <label htmlFor='city'>City</label>
+                                <input
+                                    type='text'
+                                    id='city'
+                                    name='city'
+                                    placeholder='Lagos'
+                                />
+                            </FormInput>
+
+                            <FormInput>
+                                <label htmlFor='country'>Country</label>
+                                <input
+                                    type='text'
+                                    id='country'
+                                    name='country'
+                                    placeholder='Nigeria'
+                                />
+                            </FormInput>
+                        </InputWrapper>
+                    </FormSection>
+
+                    {/* payment type*/}
+                    <FormSection>
+                        <FormTitle>payment details</FormTitle>
+
+                        <FormInput>
+                            <InputWrapper auto={true}>
+                                <span>Payment Method</span>
+
+                                <div className='radios'>
+                                    <RadioWrapper active={paymentMode.emoney}>
+                                        <input
+                                            type='radio'
+                                            id='emoney'
+                                            name='payment_method'
+                                            value='emoney'
+                                        />
+                                        <label htmlFor='emoney'>e-Money</label>
+                                    </RadioWrapper>
+
+                                    <RadioWrapper active={paymentMode.cash}>
+                                        <input
+                                            type='radio'
+                                            id='cash'
+                                            name='payment_method'
+                                            value='cash'
+                                        />
+                                        <label htmlFor='cash'>
+                                            Cash on Delivery
+                                        </label>
+                                    </RadioWrapper>
+                                </div>
+                            </InputWrapper>
+                        </FormInput>
+
+                        <PaymentType />
+                    </FormSection>
+                </div>
+
+                <Summary checkOut={checkOutHandler} />
+            </CheckOutForm>
         </FormWrapper>
     );
 };

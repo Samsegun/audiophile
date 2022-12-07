@@ -42,10 +42,6 @@ const Layout: React.FC = () => {
         <AppWrapper>
             <Header modalHandler={ctx.handleModal} />
             <ModalTemplate />
-            {/* {createPortal(
-                <ModalTemplate />,
-                document.getElementById("modal-wrapper") as HTMLElement
-            )} */}
             <div className='routes-wrapper'>
                 <Outlet />
             </div>

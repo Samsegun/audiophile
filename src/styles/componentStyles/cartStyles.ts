@@ -166,4 +166,10 @@ export const Checkout = styled.button`
     text-transform: uppercase;
     border: none;
     cursor: pointer;
+
+    &:disabled {
+        background: #fbaf85;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
 `;

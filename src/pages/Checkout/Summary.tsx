@@ -4,10 +4,9 @@ import { CartDetails, Checkout } from "../../styles/componentStyles/cartStyles";
 import { CartContext } from "../../store/cartContext";
 import { getProductNameOnly } from "../../Utils/dataUtils";
 import { cartTotalSummary, findCartImgPath } from "../../Utils/cartUtils";
-import { MobileNavContext } from "../../store/mobileNavContext";
 
 const Wrapper = styled.section`
-    margin: 2rem 0;
+    /* margin: 2rem 0; */
     padding: 2rem 1.5rem;
     background: #fff;
     border-radius: 8px;
@@ -63,9 +62,8 @@ const ItemDetails = styled.div`
     }
 `;
 
-const Summary = () => {
+const Summary: React.FC<{ checkOut: () => void }> = ({ checkOut }) => {
     const { cart } = useContext(CartContext);
-    const { handleModal } = useContext(MobileNavContext);
     const { cartTotalPrice, grandTotal, vatInt } = cartTotalSummary(cart);
 
     return (
@@ -113,9 +111,7 @@ const Summary = () => {
                 </ItemDetails>
             </div>
 
-            <Checkout onClick={handleModal.bind(null, "confirmation")}>
-                continue &amp; pay
-            </Checkout>
+            <Checkout onClick={checkOut}>continue &amp; pay</Checkout>
         </Wrapper>
     );
 };

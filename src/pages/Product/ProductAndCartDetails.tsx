@@ -34,7 +34,7 @@ const ProductAndCartDetails: React.FC<Props> = ({ item }) => {
     const [qty, setQty] = useState<number>(1);
 
     // this useEffect ensures qty starts from
-    // one when page renders
+    // one when this component recieves a new item
     useEffect(() => {
         setQty(1);
     }, [item[0].slug]);

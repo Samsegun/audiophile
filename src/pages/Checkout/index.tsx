@@ -10,7 +10,7 @@ const PageWrapper = styled.div`
     background: #f2f2f2;
     min-height: 100vh;
 
-    .forms {
+    /* .forms {
         @media screen and (min-width: 1280px) {
             display: flex;
             justify-content: space-between;
@@ -25,7 +25,7 @@ const PageWrapper = styled.div`
                 height: fit-content;
             }
         }
-    }
+    } */
 `;
 
 const BackBtn = styled.button`
@@ -39,10 +39,7 @@ const BackBtn = styled.button`
 `;
 
 const FormContent = styled.div`
-    background: #fff;
-    margin: 1.5rem 0 2rem;
-    padding: 1.5rem;
-    border-radius: 8px;
+    margin: 1.5rem 0;
 
     .heading {
         font-weight: 700;
@@ -73,15 +70,9 @@ const Checkout = () => {
             <ContentWrapper flex={false}>
                 <BackBtn onClick={() => navigate(-1)}>Go Back</BackBtn>
 
-                <div className='forms'>
-                    <FormContent>
-                        <h1 className='heading'>checkout</h1>
-
-                        <Form />
-                    </FormContent>
-
-                    <Summary />
-                </div>
+                <FormContent>
+                    <Form />
+                </FormContent>
             </ContentWrapper>
         </PageWrapper>
     );

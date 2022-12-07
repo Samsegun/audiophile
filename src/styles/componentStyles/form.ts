@@ -4,6 +4,33 @@ export const FormWrapper = styled.section`
     margin: 1rem 0 2rem;
 `;
 
+export const CheckOutForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    & > * {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 8px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 1.9rem;
+
+        & > *:first-child {
+            flex-basis: 70%;
+        }
+
+        & > *:last-child {
+            flex-basis: 30%;
+            height: fit-content;
+        }
+    }
+`;
+
 export const FormSection = styled.div`
     margin-top: 2rem;
 `;

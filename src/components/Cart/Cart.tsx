@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../store/cartContext";
 import {
@@ -38,8 +38,13 @@ export const CARTASSETS = [
 ];
 
 const Cart = () => {
+    const [checkoutBtn, setCheckOutBtn] = useState(true);
     const { cart, qtyHandler, resetCart } = useContext(CartContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        cart.length < 1 ? setCheckOutBtn(true) : setCheckOutBtn(false);
+    }, [cart.length]);
 
     const cartTotalPrice = cart.length ? getTotalPrice(cart) : 0;
 
@@ -97,7 +102,9 @@ const Cart = () => {
                     <span>$ {cartTotalPrice.toLocaleString()}</span>
                 </Total>
 
-                <Checkout onClick={() => navigate("/checkout")}>
+                <Checkout
+                    disabled={checkoutBtn}
+                    onClick={() => navigate("/checkout")}>
                     checkout
                 </Checkout>
             </div>
