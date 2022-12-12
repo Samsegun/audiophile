@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MobileNavContext } from "../../store/mobileNavContext";
@@ -10,22 +10,12 @@ const PageWrapper = styled.div`
     background: #f2f2f2;
     min-height: 100vh;
 
-    /* .forms {
-        @media screen and (min-width: 1280px) {
-            display: flex;
-            justify-content: space-between;
-            gap: 1.9rem;
-
-            & > *:first-child {
-                flex-basis: 70%;
-            }
-
-            & > *:last-child {
-                flex-basis: 30%;
-                height: fit-content;
-            }
-        }
-    } */
+    .notice {
+        font-style: italic;
+        color: #cd2c2c;
+        margin: 1rem 0;
+        font-size: 1.2rem;
+    }
 `;
 
 const BackBtn = styled.button`
@@ -69,6 +59,8 @@ const Checkout = () => {
         <PageWrapper>
             <ContentWrapper flex={false}>
                 <BackBtn onClick={() => navigate(-1)}>Go Back</BackBtn>
+
+                <p className='notice'>*Please fill all input fields!</p>
 
                 <FormContent>
                     <Form />

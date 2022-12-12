@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { CartDetails, Checkout } from "../../styles/componentStyles/cartStyles";
 import { CartContext } from "../../store/cartContext";
@@ -6,7 +6,6 @@ import { getProductNameOnly } from "../../Utils/dataUtils";
 import { cartTotalSummary, findCartImgPath } from "../../Utils/cartUtils";
 
 const Wrapper = styled.section`
-    /* margin: 2rem 0; */
     padding: 2rem 1.5rem;
     background: #fff;
     border-radius: 8px;
@@ -62,7 +61,7 @@ const ItemDetails = styled.div`
     }
 `;
 
-const Summary: React.FC<{ checkOut: () => void }> = ({ checkOut }) => {
+const Summary = () => {
     const { cart } = useContext(CartContext);
     const { cartTotalPrice, grandTotal, vatInt } = cartTotalSummary(cart);
 
@@ -111,7 +110,7 @@ const Summary: React.FC<{ checkOut: () => void }> = ({ checkOut }) => {
                 </ItemDetails>
             </div>
 
-            <Checkout onClick={checkOut}>continue &amp; pay</Checkout>
+            <Checkout type='submit'>continue &amp; pay</Checkout>
         </Wrapper>
     );
 };

@@ -13,28 +13,6 @@ export function filterAndOrderData(id: string | undefined = "") {
     return orderedCategoryData;
 }
 
-// export function checkIdName(id: string | undefined = "") {
-//     if (id === "speakers") {
-//         return "speaker";
-//     }
-
-//     return id;
-// }
-
-// export function splitProductName(productName: string, categoryName: string) {
-//     let newCategoryName;
-
-//     if (productName[productName.length - 1] === "s") {
-//         newCategoryName = categoryName;
-//     } else {
-//         newCategoryName = "speaker";
-//     }
-
-//     const splittedName = productName.toLowerCase().split(newCategoryName);
-
-//     return splittedName[0];
-// }
-
 export function splitName(productName: string) {
     let nameArray = productName.split(" ");
 

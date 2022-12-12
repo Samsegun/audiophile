@@ -57,9 +57,15 @@ export const FormTitle = styled.div`
     text-transform: uppercase;
 `;
 
-export const FormInput = styled.div`
+export const FormInput = styled.div<{ error: string }>`
     margin-bottom: 1.5rem;
     font-weight: 700;
+
+    .label-group {
+        display: flex;
+        justify-content: space-between;
+        color: ${props => (props.error ? "#CD2C2C" : "auto")};
+    }
 
     label,
     input {
@@ -79,13 +85,14 @@ export const FormInput = styled.div`
         letter-spacing: -0.25px;
         line-height: 19px;
         padding: 1.125rem 1.5rem;
-        border: 1px solid #cfcfcf;
+        border: 1px solid ${props => (props.error ? "#CD2C2C" : "#cfcfcf")};
         border-radius: 8px;
         opacity: 0.7;
         outline: none;
     }
 
     span {
+        visibility: ${props => (props.error ? "visible" : "none")};
         font-size: 12px;
         line-height: 16px;
         letter-spacing: -0.214286px;
