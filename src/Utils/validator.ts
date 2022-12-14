@@ -133,31 +133,103 @@ export const validateFormReducer = (
 };
 
 export function validateFormInputs(
-    formErrorStates: any,
-    dispatch: ({}) => void,
-    formStates: any
+    formData: any,
+    setError: any,
+    radioInputState: any
 ) {
-    // const { address, city, country, email, name, paymentMethod, phone, zip } =
-    //     formstates;
-    let disabled = true;
+    const formDataKeys = Object.keys(formData);
 
-    const formInputValues = Object.keys(formErrorStates);
+    let formError = false;
 
-    for (const key in formErrorStates) {
-        // console.log(formErrorStates[key]);
+    formDataKeys.forEach(key => {
+        switch (key) {
+            case "name":
+                if (formData[key].length < 3) {
+                    setError("name", {
+                        type: "custom",
+                        message: "name must be at least 3 characters!",
+                    });
 
-        if (!formErrorStates[key].value && !formErrorStates[key].isTouched) {
-            dispatch({ type: key, value: "" });
-            console.log({
-                key: formErrorStates[key],
-                value: formErrorStates[key].value,
-            });
-            disabled = true;
-        } else {
-            console.log("condition met!");
-            disabled = false;
+                    formError = true;
+                }
+                break;
+            case "email":
+                if (!emailTester.test(formData[key])) {
+                    setError("email", {
+                        type: "custom",
+                        message: "wrong format!",
+                    });
+                    formError = true;
+                }
+                break;
+            case "phone":
+                if (formData[key].length < 1) {
+                    setError("phone", {
+                        type: "custom",
+                        message: "field cannot be empty!",
+                    });
+                    formError = true;
+                }
+                break;
+            case "address":
+                if (formData[key].length < 1) {
+                    setError("address", {
+                        type: "custom",
+                        message: "field cannot be empty!",
+                    });
+                    formError = true;
+                }
+                break;
+            case "city":
+                if (formData[key].length < 1) {
+                    setError("city", {
+                        type: "custom",
+                        message: "field cannot be empty!",
+                    });
+                    formError = true;
+                }
+                break;
+            case "country":
+                if (formData[key].length < 1) {
+                    setError("country", {
+                        type: "custom",
+                        message: "field cannot be empty!",
+                    });
+                    formError = true;
+                }
+                break;
+            case "zip":
+                if (formData[key].length < 1) {
+                    setError("zip", {
+                        type: "custom",
+                        message: "field cannot be empty!",
+                    });
+                    formError = true;
+                }
+                break;
+            case "eNumber":
+                if (formData[key].length < 1 && radioInputState === "emoney") {
+                    setError("eNumber", {
+                        type: "custom",
+                        message: "field cannot be empty!",
+                    });
+                    formError = true;
+                }
+                break;
+            case "ePin":
+                if (formData[key].length < 1 && radioInputState === "emoney") {
+                    setError("ePin", {
+                        type: "custom",
+                        message: "field cannot be empty!",
+                    });
+                    formError = true;
+                }
+                break;
+            default:
+                formError = false;
+                break;
         }
-    }
+    });
 
-    return disabled;
+    return formError;
 }

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { MobileNavContext } from "../../store/mobileNavContext";
 import { ContentWrapper } from "../../styles/global-styles";
 import Form from "./Form";
-import Summary from "./Summary";
 
 const PageWrapper = styled.div`
     background: #f2f2f2;

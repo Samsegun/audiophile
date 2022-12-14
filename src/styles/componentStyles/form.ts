@@ -57,7 +57,7 @@ export const FormTitle = styled.div`
     text-transform: uppercase;
 `;
 
-export const FormInput = styled.div<{ error: string }>`
+export const FormInput = styled.div<{ error: string | undefined }>`
     margin-bottom: 1.5rem;
     font-weight: 700;
 

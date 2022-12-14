@@ -1,4 +1,5 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
+import { useForm } from "react-hook-form";
 import { MobileNavContext } from "../../store/mobileNavContext";
 import {
     FormWrapper,
@@ -17,6 +18,21 @@ import {
     validateFormReducer,
 } from "../../Utils/validator";
 import Summary from "./Summary";
+
+type FormInputs = {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+    zip: string;
+    city: string;
+    country: string;
+    paymentMethod: string;
+    // emoney?: string;
+    // cash?: string;
+    eNumber?: string;
+    ePin?: string;
+};
 
 interface StateProps {
     name: string;
@@ -73,57 +89,37 @@ const formReducer = (
 };
 
 const Form = () => {
-    const [formStates, dispatchFormFn] = useReducer<React.Reducer<any, any>>(
-        formReducer,
-        formState
-    );
-
-    const [formErrorStates, dispatchFormError] = useReducer<
-        React.Reducer<any, any>
-    >(validateFormReducer, formErrors);
-    const [disableSubmitBtn, setDisableSubmitBtn] = useState(true);
     const { handleModal } = useContext(MobileNavContext);
+    const [radioInputState, setRadioInputState] = useState("");
 
-    const onChangeHandler = (event: React.ChangeEvent<HTMLFormElement>) => {
-        dispatchFormFn({
-            type: event.target.name,
-            value: event.target.value,
-        });
+    const {
+        register,
+        setError,
+        formState: { errors },
+        handleSubmit,
+    } = useForm<FormInputs>();
 
-        // setDisableSubmitBtn(validateFormInputs(formErrorStates));
+    const radioInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setRadioInputState(e.target.value);
     };
 
-    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if (formStates.paymentMethod === "cash") {
-            delete formStates["eNumber"];
-            delete formStates["ePin"];
-        }
-
-        if (
-            validateFormInputs(formErrorStates, dispatchFormError, formStates)
-        ) {
+    const submitHandler = (data: FormInputs) => {
+        if (validateFormInputs(data, setError, radioInputState)) {
             return;
-        } else {
-            console.log(formStates);
         }
 
-        // setError(validateFormInputs(formErrorStates));
+        if (radioInputState === "cash") {
+            delete data["eNumber"];
+            delete data["ePin"];
+        }
 
-        // handleModal("confirmation");
-    };
-
-    const blurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
-        dispatchFormError({
-            type: e.target.name,
-            value: e.target.value,
-        });
+        console.log(data);
+        handleModal("confirmation");
     };
 
     return (
         <FormWrapper>
-            <CheckOutForm onChange={onChangeHandler} onSubmit={submitHandler}>
+            <CheckOutForm onSubmit={handleSubmit(submitHandler)}>
                 <div className='form-inputs'>
                     <h1 className='heading'>checkout </h1>
                     {/* billing */}
@@ -131,45 +127,60 @@ const Form = () => {
                         <FormTitle>billing details</FormTitle>
 
                         <InputWrapper auto={true}>
-                            <FormInput error={formErrorStates.name.value}>
+                            <FormInput error={errors?.name?.message}>
                                 <div className='label-group'>
                                     <label htmlFor='name'>Name</label>
-                                    <span>{formErrorStates.name.value}</span>
+                                    {errors.name && (
+                                        <span role='alert'>
+                                            {errors.name.message}
+                                        </span>
+                                    )}
                                 </div>
                                 <input
                                     type='text'
                                     id='name'
-                                    name='name'
                                     placeholder='Samuel'
-                                    onBlur={blurHandler}
+                                    {...register("name", {
+                                        required: true,
+                                    })}
                                 />
                             </FormInput>
 
-                            <FormInput error={formErrorStates.email.value}>
+                            <FormInput error={errors?.email?.message}>
                                 <div className='label-group'>
                                     <label htmlFor='email'>Email Address</label>
-                                    <span>{formErrorStates.email.value}</span>
+                                    {errors.email && (
+                                        <span role='alert'>
+                                            {errors.email.message}
+                                        </span>
+                                    )}
                                 </div>
                                 <input
                                     type='text'
                                     id='email'
-                                    name='email'
                                     placeholder='Samsegun@email.com'
-                                    onBlur={blurHandler}
+                                    {...register("email", {
+                                        required: true,
+                                    })}
                                 />
                             </FormInput>
 
-                            <FormInput error={formErrorStates.phone.value}>
+                            <FormInput error={errors?.phone?.message}>
                                 <div className='label-group'>
                                     <label htmlFor='phone'>Phone Number</label>
-                                    <span>{formErrorStates.phone.value}</span>
+                                    {errors.phone && (
+                                        <span role='alert'>
+                                            {errors.phone.message}
+                                        </span>
+                                    )}
                                 </div>
                                 <input
                                     type={"tel"}
                                     id='phone'
-                                    name='phone'
                                     placeholder='+1 202-555-0136'
-                                    onBlur={blurHandler}
+                                    {...register("phone", {
+                                        required: true,
+                                    })}
                                 />
                             </FormInput>
                         </InputWrapper>
@@ -180,61 +191,81 @@ const Form = () => {
                         <FormTitle>shipping info</FormTitle>
 
                         <InputWrapper auto={false}>
-                            <FormInput error={formErrorStates.address.value}>
+                            <FormInput error={errors?.address?.message}>
                                 <div className='label-group'>
                                     <label htmlFor='address'>
                                         Your Address
                                     </label>
-                                    <span>{formErrorStates.address.value}</span>
+                                    {errors.address && (
+                                        <span role='alert'>
+                                            {errors.address.message}
+                                        </span>
+                                    )}
                                 </div>
                                 <input
                                     type='text'
                                     id='address'
-                                    name='address'
                                     placeholder='1137 Williams Avenue'
-                                    onBlur={blurHandler}
+                                    {...register("address", {
+                                        required: true,
+                                    })}
                                 />
                             </FormInput>
 
-                            <FormInput error={formErrorStates.zip.value}>
+                            <FormInput error={errors?.zip?.message}>
                                 <div className='label-group'>
                                     <label htmlFor='zip'>ZIP Code</label>
-                                    <span>{formErrorStates.zip.value}</span>
+                                    {errors.zip && (
+                                        <span role='alert'>
+                                            {errors.zip.message}
+                                        </span>
+                                    )}
                                 </div>
                                 <input
                                     type='number'
                                     id='zip'
-                                    name='zip'
                                     placeholder='10001'
-                                    onBlur={blurHandler}
+                                    {...register("zip", {
+                                        required: true,
+                                    })}
                                 />
                             </FormInput>
 
-                            <FormInput error={formErrorStates.city.value}>
+                            <FormInput error={errors?.city?.message}>
                                 <div className='label-group'>
                                     <label htmlFor='city'>City</label>
-                                    <span>{formErrorStates.city.value}</span>
+                                    {errors.city && (
+                                        <span role='alert'>
+                                            {errors.city.message}
+                                        </span>
+                                    )}
                                 </div>
                                 <input
                                     type='text'
                                     id='city'
-                                    name='city'
                                     placeholder='Lagos'
-                                    onBlur={blurHandler}
+                                    {...register("city", {
+                                        required: true,
+                                    })}
                                 />
                             </FormInput>
 
-                            <FormInput error={formErrorStates.country.value}>
+                            <FormInput error={errors?.country?.message}>
                                 <div className='label-group'>
                                     <label htmlFor='country'>Country</label>
-                                    <span>{formErrorStates.country.value}</span>
+                                    {errors.country && (
+                                        <span role='alert'>
+                                            {errors.country.message}
+                                        </span>
+                                    )}
                                 </div>
                                 <input
                                     type='text'
                                     id='country'
-                                    name='country'
                                     placeholder='Nigeria'
-                                    onBlur={blurHandler}
+                                    {...register("country", {
+                                        required: true,
+                                    })}
                                 />
                             </FormInput>
                         </InputWrapper>
@@ -244,34 +275,35 @@ const Form = () => {
                     <FormSection>
                         <FormTitle>payment details</FormTitle>
 
-                        <FormInput error={formErrorStates.paymentMethod.value}>
+                        <FormInput error={errors?.paymentMethod?.message}>
                             <InputWrapper auto={true}>
                                 <span>Payment Method</span>
 
                                 <div className='radios'>
                                     <RadioWrapper
-                                        active={
-                                            formStates.paymentMethod ===
-                                            "emoney"
-                                        }>
+                                        active={radioInputState === "emoney"}>
                                         <input
                                             type='radio'
                                             id='emoney'
-                                            name='paymentMethod'
                                             value='emoney'
+                                            {...register("paymentMethod", {
+                                                required: true,
+                                            })}
+                                            onChange={radioInputHandler}
                                         />
                                         <label htmlFor='emoney'>e-Money</label>
                                     </RadioWrapper>
 
                                     <RadioWrapper
-                                        active={
-                                            formStates.paymentMethod === "cash"
-                                        }>
+                                        active={radioInputState === "cash"}>
                                         <input
                                             type='radio'
                                             id='cash'
-                                            name='paymentMethod'
                                             value='cash'
+                                            {...register("paymentMethod", {
+                                                required: true,
+                                            })}
+                                            onChange={radioInputHandler}
                                         />
                                         <label htmlFor='cash'>
                                             Cash on Delivery
@@ -281,35 +313,53 @@ const Form = () => {
                             </InputWrapper>
                         </FormInput>
 
-                        {/* {formStates.paymentMethod === "emoney" && (
+                        {radioInputState === "emoney" && (
                             <Emoney>
-                        
-                                <FormInput>
-                                    <label htmlFor='e-number'>
-                                        e-Money Number
-                                    </label>
+                                <FormInput error={errors?.eNumber?.message}>
+                                    <div className='label-group'>
+                                        <label htmlFor='e-number'>
+                                            e-Money Number
+                                        </label>
+                                        {errors.eNumber && (
+                                            <span role='alert'>
+                                                {errors.eNumber.message}
+                                            </span>
+                                        )}
+                                    </div>
                                     <input
                                         type='number'
                                         id='e-number'
-                                        name='eNumber'
                                         placeholder='238521993'
+                                        {...register("eNumber", {
+                                            required: true,
+                                        })}
                                     />
                                 </FormInput>
 
-                            
-                                <FormInput>
-                                    <label htmlFor='e-pin'>e-Money PIN</label>
+                                <FormInput error={errors?.ePin?.message}>
+                                    <div className='label-group'>
+                                        <label htmlFor='e-number'>
+                                            e-Money PIN
+                                        </label>
+                                        {errors.ePin && (
+                                            <span role='alert'>
+                                                {errors.ePin.message}
+                                            </span>
+                                        )}
+                                    </div>
                                     <input
                                         type='number'
                                         id='e-pin'
-                                        name='ePin'
                                         placeholder='6891'
+                                        {...register("ePin", {
+                                            required: true,
+                                        })}
                                     />
                                 </FormInput>
                             </Emoney>
-                         )} */}
+                        )}
 
-                        {/* {formStates.paymentMethod === "cash" && (
+                        {radioInputState === "cash" && (
                             <Cash>
                                 <div>
                                     <svg
@@ -330,7 +380,7 @@ const Form = () => {
                                     will not be cancelled.
                                 </p>
                             </Cash>
-                        )} */}
+                        )}
                     </FormSection>
                 </div>
 
