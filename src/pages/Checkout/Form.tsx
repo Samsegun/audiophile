@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { MobileNavContext } from "../../store/mobileNavContext";
 import {
@@ -12,11 +12,7 @@ import {
     Emoney,
     CheckOutForm,
 } from "../../styles/componentStyles/form";
-import {
-    formErrors,
-    validateFormInputs,
-    validateFormReducer,
-} from "../../Utils/validator";
+import { validateFormInputs } from "../../Utils/validator";
 import Summary from "./Summary";
 
 type FormInputs = {
@@ -28,64 +24,8 @@ type FormInputs = {
     city: string;
     country: string;
     paymentMethod: string;
-    // emoney?: string;
-    // cash?: string;
     eNumber?: string;
     ePin?: string;
-};
-
-interface StateProps {
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-    zip: string;
-    city: string;
-    country: string;
-    paymentMethod: string;
-    eNumber?: string;
-    ePin?: string;
-}
-
-const formState = {
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    zip: "",
-    city: "",
-    country: "",
-    paymentMethod: "",
-};
-
-const formReducer = (
-    state: StateProps,
-    action: { type: string; value: string }
-) => {
-    switch (action.type) {
-        case "name":
-            return { ...state, name: action.value };
-        case "email":
-            return { ...state, email: action.value };
-        case "phone":
-            return { ...state, phone: action.value };
-        case "address":
-            return { ...state, address: action.value };
-        case "zip":
-            return { ...state, zip: action.value };
-        case "city":
-            return { ...state, city: action.value };
-        case "country":
-            return { ...state, country: action.value };
-        case "paymentMethod":
-            return { ...state, paymentMethod: action.value };
-        case "eNumber":
-            return { ...state, eNumber: action.value };
-        case "ePin":
-            return { ...state, ePin: action.value };
-        default:
-            return;
-    }
 };
 
 const Form = () => {
@@ -113,7 +53,6 @@ const Form = () => {
             delete data["ePin"];
         }
 
-        console.log(data);
         handleModal("confirmation");
     };
 
