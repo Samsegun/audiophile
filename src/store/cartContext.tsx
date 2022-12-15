@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     CartContentTypes,
     CartContextTypes,
@@ -21,6 +21,10 @@ const CartContextProvider: React.FC<{ children: React.ReactNode }> = ({
     const [cart, setCart] = useState<CartContentTypes[]>([]);
     const [cartNotification, setCartNotificaion] = useState(false);
 
+    useEffect(() => {
+        setCart(JSON.parse(localStorage.getItem("cart")!));
+    }, []);
+
     const addToCart = (
         price: number,
         slug: string,
@@ -29,10 +33,11 @@ const CartContextProvider: React.FC<{ children: React.ReactNode }> = ({
     ) => {
         // check if product exist in cart
         const productToAdd = cart.find(item => item.slug === slug);
-
         if (productToAdd) return;
 
         const newCart = [...cart, { price, slug, name, qty, inCart: true }];
+
+        localStorage.setItem("cart", JSON.stringify(newCart));
 
         setCart(newCart);
 
@@ -49,16 +54,22 @@ const CartContextProvider: React.FC<{ children: React.ReactNode }> = ({
         // if cart is empty, close notification
         if (!newCart.length) setCartNotificaion(false);
 
+        localStorage.setItem("cart", JSON.stringify(newCart));
+
         setCart(newCart);
     };
 
     const resetCart = (newCart: CartContentTypes[]) => {
+        localStorage.setItem("cart", JSON.stringify(newCart));
+
         setCart([...newCart]);
         setCartNotificaion(false);
     };
 
     const qtyHandler = (operation: string, slug: string, crt = cart) => {
         const updatedProducts = updateAndReturnCartItems(crt, operation, slug);
+        localStorage.setItem("cart", JSON.stringify(updatedProducts));
+
         setCart(updatedProducts);
     };
 

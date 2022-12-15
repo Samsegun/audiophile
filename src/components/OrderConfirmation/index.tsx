@@ -11,9 +11,14 @@ import { cartTotalSummary } from "../../Utils/cartUtils";
 import CartItemsBody from "./OrderItems";
 
 const OrderConfirmation = () => {
-    const { cart } = useContext(CartContext);
+    const { cart, resetCart } = useContext(CartContext);
     const navigate = useNavigate();
     const { cartTotalPrice } = cartTotalSummary(cart);
+
+    const checkOutHandler = () => {
+        resetCart([]);
+        navigate("/");
+    };
 
     return (
         <OrderWrapper>
@@ -40,7 +45,7 @@ const OrderConfirmation = () => {
                 </div>
             </ItemsTotal>
 
-            <Checkout onClick={() => navigate("/")}>Back to home</Checkout>
+            <Checkout onClick={checkOutHandler}>Back to home</Checkout>
         </OrderWrapper>
     );
 };

@@ -21,7 +21,6 @@ export const ShowcaseWrapper = styled.section`
             }
 
             @media screen and (min-width: 1280px) {
-                /* position: absolute; */
                 max-width: fit-content;
                 width: 410px;
             }

@@ -1,11 +1,9 @@
-import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { CartContext } from "../store/cartContext";
 
 const PrivateRoutes = () => {
-    const { cart } = useContext(CartContext);
+    // const { cart } = useContext(CartContext);
 
-    if (!cart.length) {
+    if (!localStorage.getItem("cart")) {
         return <Navigate to='/' replace />;
     }
 

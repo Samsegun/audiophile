@@ -22,11 +22,16 @@ const ProductShowcase = () => {
             {/* zx9 speaker */}
             <div className='zx9'>
                 <div className='img-wrapper'>
-                    <picture>
-                        <source srcSet={zx9Desk} media='(min-width: 1280px)' />
-                        <source srcSet={zx9} />
-                        <img src={zx9} alt='speaker' />
-                    </picture>
+                    <div className='img-container'>
+                        <picture>
+                            <source
+                                srcSet={zx9Desk}
+                                media='(min-width: 1280px)'
+                            />
+                            <source srcSet={zx9} />
+                            <img src={zx9} alt='speaker' />
+                        </picture>
+                    </div>
                 </div>
 
                 <div className='info'>
