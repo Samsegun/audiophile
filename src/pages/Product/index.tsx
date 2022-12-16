@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ContentWrapper } from "../../styles/global-styles";
@@ -44,111 +45,117 @@ const Product: React.FC = () => {
     const productGallery: GalleryProps = product[0].gallery;
 
     return (
-        <StyledSection>
-            <ContentWrapper flex={false}>
-                <button className='back-btn' onClick={() => navigate(-1)}>
-                    Go Back
-                </button>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            exit={{ opacity: 0 }}>
+            <StyledSection>
+                <ContentWrapper flex={false}>
+                    <button className='back-btn' onClick={() => navigate(-1)}>
+                        Go Back
+                    </button>
 
-                <ProductAndCartDetails item={product} id={id} />
+                    <ProductAndCartDetails item={product} id={id} />
 
-                <FeaturesAndContent>
-                    <Features>
-                        <Heading>Features</Heading>
+                    <FeaturesAndContent>
+                        <Features>
+                            <Heading>Features</Heading>
 
-                        <p>{splitParagraph(productFeatures).textOne}</p>
-                        <br />
-                        <p>{splitParagraph(productFeatures).textTwo}</p>
-                    </Features>
+                            <p>{splitParagraph(productFeatures).textOne}</p>
+                            <br />
+                            <p>{splitParagraph(productFeatures).textTwo}</p>
+                        </Features>
 
-                    <BoxContent>
-                        <Heading>in the box</Heading>
+                        <BoxContent>
+                            <Heading>in the box</Heading>
 
-                        <div className='list'>
-                            <ul>
-                                {productContents.map((content, idx) => {
-                                    return (
-                                        <ListItem key={idx}>
-                                            <span className='qty'>
-                                                {content.quantity}X
-                                            </span>
-                                            <span className='item'>
-                                                {content.item}
-                                            </span>
-                                        </ListItem>
-                                    );
-                                })}
-                            </ul>
+                            <div className='list'>
+                                <ul>
+                                    {productContents.map((content, idx) => {
+                                        return (
+                                            <ListItem key={idx}>
+                                                <span className='qty'>
+                                                    {content.quantity}X
+                                                </span>
+                                                <span className='item'>
+                                                    {content.item}
+                                                </span>
+                                            </ListItem>
+                                        );
+                                    })}
+                                </ul>
+                            </div>
+                        </BoxContent>
+                    </FeaturesAndContent>
+
+                    <Gallery>
+                        <div className='img-wrapper'>
+                            <picture>
+                                <source
+                                    srcSet={productGallery.first.desktop}
+                                    media='(min-width: 1280px)'
+                                />
+                                <source
+                                    srcSet={productGallery.first.tablet}
+                                    media='(min-width: 768px)'
+                                />
+                                <source srcSet={productGallery.first.mobile} />
+                                <img
+                                    src={productGallery.first.mobile}
+                                    alt={product[0].name}
+                                />
+                            </picture>
                         </div>
-                    </BoxContent>
-                </FeaturesAndContent>
 
-                <Gallery>
-                    <div className='img-wrapper'>
-                        <picture>
-                            <source
-                                srcSet={productGallery.first.desktop}
-                                media='(min-width: 1280px)'
-                            />
-                            <source
-                                srcSet={productGallery.first.tablet}
-                                media='(min-width: 768px)'
-                            />
-                            <source srcSet={productGallery.first.mobile} />
-                            <img
-                                src={productGallery.first.mobile}
-                                alt={product[0].name}
-                            />
-                        </picture>
-                    </div>
+                        <div className='img-wrapper'>
+                            <picture>
+                                <source
+                                    srcSet={productGallery.second.desktop}
+                                    media='(min-width: 1280px)'
+                                />
+                                <source
+                                    srcSet={productGallery.second.tablet}
+                                    media='(min-width: 768px)'
+                                />
+                                <source srcSet={productGallery.second.mobile} />
+                                <img
+                                    src={productGallery.second.mobile}
+                                    alt={product[0].name}
+                                />
+                            </picture>
+                        </div>
 
-                    <div className='img-wrapper'>
-                        <picture>
-                            <source
-                                srcSet={productGallery.second.desktop}
-                                media='(min-width: 1280px)'
-                            />
-                            <source
-                                srcSet={productGallery.second.tablet}
-                                media='(min-width: 768px)'
-                            />
-                            <source srcSet={productGallery.second.mobile} />
-                            <img
-                                src={productGallery.second.mobile}
-                                alt={product[0].name}
-                            />
-                        </picture>
-                    </div>
+                        <div className='img-wrapper'>
+                            <picture>
+                                <source
+                                    srcSet={productGallery.third.desktop}
+                                    media='(min-width: 1280px)'
+                                />
+                                <source
+                                    srcSet={productGallery.third.tablet}
+                                    media='(min-width: 768px)'
+                                />
+                                <source srcSet={productGallery.third.mobile} />
+                                <img
+                                    src={productGallery.third.mobile}
+                                    alt={product[0].name}
+                                />
+                            </picture>
+                        </div>
+                    </Gallery>
 
-                    <div className='img-wrapper'>
-                        <picture>
-                            <source
-                                srcSet={productGallery.third.desktop}
-                                media='(min-width: 1280px)'
-                            />
-                            <source
-                                srcSet={productGallery.third.tablet}
-                                media='(min-width: 768px)'
-                            />
-                            <source srcSet={productGallery.third.mobile} />
-                            <img
-                                src={productGallery.third.mobile}
-                                alt={product[0].name}
-                            />
-                        </picture>
-                    </div>
-                </Gallery>
+                    <OtherProduct
+                        product={product[0].others}
+                        category={product[0].category}
+                    />
 
-                <OtherProduct
-                    product={product[0].others}
-                    category={product[0].category}
-                />
+                    <ProductCategories />
 
-                <ProductCategories />
-
-                <About marginTop='7.5rem' />
-            </ContentWrapper>
-        </StyledSection>
+                    <About marginTop='7.5rem' />
+                </ContentWrapper>
+            </StyledSection>
+        </motion.div>
     );
 };
 

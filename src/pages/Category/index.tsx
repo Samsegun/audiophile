@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -31,72 +32,89 @@ const Category = () => {
     };
 
     return (
-        <ProductSection>
-            <div className='title-wrapper'>
-                <h1>{id}</h1>
-            </div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            exit={{ opacity: 0 }}>
+            <ProductSection>
+                <div className='title-wrapper'>
+                    <h1>{id}</h1>
+                </div>
 
-            <ContentWrapper flex={false}>
-                {orderedCategoryData.map((category, idx) => {
-                    return (
-                        <ProductWrapper key={category.id}>
-                            <ProductText
-                                switchOrder={idx % 2 === 0 ? true : false}>
-                                <div className='img-wrapper'>
-                                    <picture>
-                                        <source
-                                            srcSet={
-                                                category.categoryImage.desktop
+                <ContentWrapper flex={false}>
+                    {orderedCategoryData.map((category, idx) => {
+                        return (
+                            <ProductWrapper key={category.id}>
+                                <ProductText
+                                    switchOrder={idx % 2 === 0 ? true : false}>
+                                    <div className='img-wrapper'>
+                                        <picture>
+                                            <source
+                                                srcSet={
+                                                    category.categoryImage
+                                                        .desktop
+                                                }
+                                                media='(min-width: 1280px)'
+                                            />
+                                            <source
+                                                srcSet={
+                                                    category.categoryImage
+                                                        .tablet
+                                                }
+                                                media='(min-width: 768px)'
+                                            />
+                                            <source
+                                                srcSet={
+                                                    category.categoryImage
+                                                        .mobile
+                                                }
+                                            />
+                                            <img
+                                                src={
+                                                    category.categoryImage
+                                                        .mobile
+                                                }
+                                                alt={category.name}
+                                            />
+                                        </picture>
+                                    </div>
+
+                                    <div className='text-wrapper'>
+                                        {category.new && (
+                                            <span>new product</span>
+                                        )}
+
+                                        <h1>
+                                            {splitName(category.name).firstLine}
+                                            <br />
+                                            {
+                                                splitName(category.name)
+                                                    .secondLine
                                             }
-                                            media='(min-width: 1280px)'
-                                        />
-                                        <source
-                                            srcSet={
-                                                category.categoryImage.tablet
-                                            }
-                                            media='(min-width: 768px)'
-                                        />
-                                        <source
-                                            srcSet={
-                                                category.categoryImage.mobile
-                                            }
-                                        />
-                                        <img
-                                            src={category.categoryImage.mobile}
-                                            alt={category.name}
-                                        />
-                                    </picture>
-                                </div>
+                                        </h1>
 
-                                <div className='text-wrapper'>
-                                    {category.new && <span>new product</span>}
+                                        <p>{category.description}</p>
 
-                                    <h1>
-                                        {splitName(category.name).firstLine}
-                                        <br />
-                                        {splitName(category.name).secondLine}
-                                    </h1>
+                                        <Button
+                                            bgColor='#D87D4A'
+                                            onClick={navigateToProduct.bind(
+                                                null,
+                                                category.slug
+                                            )}>
+                                            see product
+                                        </Button>
+                                    </div>
+                                </ProductText>
+                            </ProductWrapper>
+                        );
+                    })}
+                    <Categories />
 
-                                    <p>{category.description}</p>
-
-                                    <Button
-                                        bgColor='#D87D4A'
-                                        onClick={navigateToProduct.bind(
-                                            null,
-                                            category.slug
-                                        )}>
-                                        see product
-                                    </Button>
-                                </div>
-                            </ProductText>
-                        </ProductWrapper>
-                    );
-                })}
-                <Categories />
-
-                <About marginTop='7.5rem' />
-            </ContentWrapper>
-        </ProductSection>
+                    <About marginTop='7.5rem' />
+                </ContentWrapper>
+            </ProductSection>
+        </motion.div>
     );
 };
 

@@ -22,7 +22,9 @@ const CartContextProvider: React.FC<{ children: React.ReactNode }> = ({
     const [cartNotification, setCartNotificaion] = useState(false);
 
     useEffect(() => {
-        setCart(JSON.parse(localStorage.getItem("cart")!));
+        if (localStorage.getItem("cart")) {
+            setCart(JSON.parse(localStorage.getItem("cart")!));
+        }
     }, []);
 
     const addToCart = (

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -55,17 +56,23 @@ const Checkout = () => {
     }, []);
 
     return (
-        <PageWrapper>
-            <ContentWrapper flex={false}>
-                <BackBtn onClick={() => navigate(-1)}>Go Back</BackBtn>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            exit={{ opacity: 0 }}>
+            <PageWrapper>
+                <ContentWrapper flex={false}>
+                    <BackBtn onClick={() => navigate(-1)}>Go Back</BackBtn>
 
-                <p className='notice'>*Please fill all input fields!</p>
+                    <p className='notice'>*Please fill all input fields!</p>
 
-                <FormContent>
-                    <Form />
-                </FormContent>
-            </ContentWrapper>
-        </PageWrapper>
+                    <FormContent>
+                        <Form />
+                    </FormContent>
+                </ContentWrapper>
+            </PageWrapper>
+        </motion.div>
     );
 };
 
