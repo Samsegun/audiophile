@@ -38,7 +38,8 @@ const Footer = () => {
 
                     <div className='copyright-wrapper'>
                         <p className='info-copyright'>
-                            Copyright 2021. All Rights Reserved
+                            Copyright {new Date().getFullYear()}. All Rights
+                            Reserved
                         </p>
 
                         <div className='info-socials'>
