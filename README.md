@@ -61,4 +61,4 @@ I intend to make this project a full-blown app using supabase as a backend servi
 -   Github - [Samuel Oyebade](https://github.com/Samsegun/)
 -   Frontend Mentor - [@Samsegun](https://www.frontendmentor.io/profile/Samsegun)
 -   Twitter - [@datsleumas](https://www.twitter.com/datsleumas)
--   Gmail - [oyebadesegunsam@gmail.com](oyebadesegunsam@gmail.com)
+-   Mobile - +2348094942824
