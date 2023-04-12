@@ -11,6 +11,7 @@ export const ContentWrapper = styled.div<WrapperProps>`
     align-items: center;
     max-width: 1280px;
     margin: auto;
+    position: relative;
 
     @media screen and (min-width: 768px) {
         padding: 2rem 2.5rem;

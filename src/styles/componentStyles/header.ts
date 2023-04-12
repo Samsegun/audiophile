@@ -14,6 +14,10 @@ export const StyledHeader = styled.header`
         cursor: pointer;
     }
 
+    .new-div {
+        position: relative;
+    }
+
     .logo-menu {
         flex-basis: 65%;
         display: flex;

@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const CartWrapper = styled.div`
-    position: fixed;
+    flex: none;
+    position: absolute;
     background: #fff;
-    top: 20%;
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
     min-width: 327px;
@@ -23,6 +24,7 @@ export const CartWrapper = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        color: #000;
         line-height: 25px;
 
         h2 {
@@ -69,7 +71,7 @@ export const CartWrapper = styled.div`
     }
 
     @media screen and (min-width: 1280px) {
-        top: 20%;
+        left: 80%;
     }
 `;
 
@@ -83,6 +85,7 @@ export const CartDetails = styled.div`
         display: flex;
         justify-content: start;
         align-items: center;
+        color: #000;
         gap: 1rem;
         flex-basis: 60%;
 
@@ -131,6 +134,7 @@ export const CartDetails = styled.div`
         span {
             font-weight: 700;
             font-size: 13px;
+            color: #000;
             line-height: 18px;
             letter-spacing: 1px;
         }
@@ -138,6 +142,7 @@ export const CartDetails = styled.div`
 `;
 
 export const Total = styled.div`
+    color: #000;
     display: flex;
     justify-content: space-between;
     margin: 0.5rem 0 1.5rem;
@@ -156,7 +161,7 @@ export const Total = styled.div`
 `;
 
 export const Checkout = styled.button`
-    background: #d87d4a;
+    background: #d87d4a !important;
     color: #fff;
     width: 100%;
     padding: 1rem 3rem;

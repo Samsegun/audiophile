@@ -23,10 +23,11 @@ const Layout: React.FC = () => {
     const ctx = useContext(MobileNavContext);
 
     const ModalTemplate = () => {
-        if (ctx.isCart || ctx.isMobileNav || ctx.isConfirmation) {
+        if (ctx.isMobileNav || ctx.isConfirmation) {
+            // if (ctx.isCart || ctx.isMobileNav || ctx.isConfirmation) {
             return (
                 <>
-                    {ctx.isCart && <Cart />}
+                    {/* {ctx.isCart && <Cart />} */}
                     {ctx.isMobileNav && <MobileMenu />}
                     {ctx.isConfirmation && <OrderConfirmation />}
 
